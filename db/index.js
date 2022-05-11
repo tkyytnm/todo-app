@@ -5,7 +5,7 @@ const connectionString = `postgresql://${USER}:${PASS}@${HOST}:${PORT}/${NAME}`;
 const pool = new Pool({ connectionString });
 
 module.exports = {
-  query: (text, params, callback) => {
-    return pool.query(text, params, callback);
+  async query(text, params) {
+    return await pool.query(text, params);
   },
 };

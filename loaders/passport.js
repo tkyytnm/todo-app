@@ -26,12 +26,12 @@ module.exports = (app) => {
         try {
           const user = await userModelInstance.findUserByEmail(email);
           if (!user) {
-            return cb(null, false, { message: "Incorrect email or password." });
+            return cb(null, false, { message: "Emailまたはパスワードが間違っています。" });
           }
 
           const match = await bcrypt.compare(password, user.password);
           if (!match) {
-            return cb(null, false, { message: "Incorrect email or password." });
+            return cb(null, false, { message: "Emailまたはパスワードが間違っています。" });
           }
 
           return cb(null, user);

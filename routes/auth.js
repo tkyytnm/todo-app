@@ -9,7 +9,7 @@ router.get("/", (req, res, next) => {
 });
 
 router.get("/login", (req, res, next) => {
-  res.send("Failure Login.");
+  res.send(req.session.messages);
 });
 
 router.post(
