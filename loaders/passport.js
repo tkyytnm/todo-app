@@ -1,7 +1,7 @@
 const passport = require("passport");
 const LocalStrategy = require("passport-local");
-const userModel = require("../models/user");
-const userModelInstance = new userModel();
+const UserModel = require("../models/user");
+const UserModelInstance = new UserModel();
 const bcrypt = require("bcrypt");
 
 module.exports = (app) => {
@@ -24,7 +24,7 @@ module.exports = (app) => {
       { usernameField: "email" },
       async (email, password, cb) => {
         try {
-          const user = await userModelInstance.findUserByEmail(email);
+          const user = await UserModelInstance.findUserByEmail(email);
           if (!user) {
             return cb(null, false, { message: "Emailまたはパスワードが間違っています。" });
           }

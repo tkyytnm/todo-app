@@ -17,7 +17,7 @@ router.post("/", async (req, res, next) => {
   try {
     const data = req.body;
     const response = await ToDoServiceInstance.createToDo(data);
-    res.send(response);
+    res.status(201).send(response);
   } catch (err) {
     next(err);
   }
