@@ -8,7 +8,7 @@ module.exports = class authService {
   async createUser(data) {
     const { email, password } = data;
     try {
-      const user = userModelInstance.findUserByEmail(email);
+      const user = await userModelInstance.findUserByEmail(email);
       if (user) {
         throw createError(409, "Email already exists.");
       }
