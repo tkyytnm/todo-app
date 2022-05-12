@@ -16,8 +16,6 @@ const createError = require("http-errors");
  *          schema:
  *            type: object
  *            properties:
- *              id:
- *                type: integer
  *              email:
  *                type: string
  *    responses:
@@ -36,7 +34,10 @@ router.put("/profile", async (req, res, next) => {
       throw createError(401, "Please log in.");
     }
     const data = req.body;
-    const response = await UserServiceInstance.updateProfile(data);
+    const response = await UserServiceInstance.updateProfile({
+      ...data,
+      id: req.user.id,
+    });
     res.send(response);
   } catch (err) {
     next(err);
@@ -55,8 +56,6 @@ router.put("/profile", async (req, res, next) => {
  *          schema:
  *            type: object
  *            properties:
- *              id:
- *                type: integer
  *              password:
  *                type: string
  *    responses:
@@ -75,7 +74,10 @@ router.put("/password", async (req, res, next) => {
       throw createError(401, "Please log in.");
     }
     const data = req.body;
-    const response = await UserServiceInstance.updatePassword(data);
+    const response = await UserServiceInstance.updatePassword({
+      ...data,
+      id: req.user.id,
+    });
     res.send(response);
   } catch (err) {
     next(err);
@@ -84,7 +86,7 @@ router.put("/password", async (req, res, next) => {
 
 /**
  * @swagger
- * /api/user/{id}:
+ * /api/user/:
  *  delete:
  *    summary: Delete a user.
  *    responses:
@@ -100,7 +102,7 @@ router.delete("/", async (req, res, next) => {
     if (!req.user) {
       throw createError(401, "Please log in.");
     }
-    
+
     const response = await UserServiceInstance.deleteUser(req.user.id);
     res.send(response);
   } catch (err) {

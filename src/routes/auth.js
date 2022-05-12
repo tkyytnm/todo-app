@@ -49,17 +49,6 @@ router.post(
  * /api/auth/logout:
  *  post:
  *    summary: Logout a user.
- *    requestBody:
- *      required: true
- *      content:
- *        application/json:
- *          schema:
- *            type: object
- *            properties:
- *              email:
- *                type: string
- *              password:
- *                type: string
  *    responses:
  *      '201':
  *        description: Logout succeeded.
@@ -112,8 +101,13 @@ router.post("/logout", (req, res, next) => {
 router.post("/register", async (req, res, next) => {
   try {
     const data = req.body;
-    const response = await AuthServiceInstance.createUser(data);
-    res.status(201).send(response);
+    const user = await AuthServiceInstance.createUser(data);
+    req.login(user, (err) => {
+      if (err) {
+        return next(err);
+      }
+      res.status(201).send(user);
+    });
   } catch (err) {
     next(err);
   }

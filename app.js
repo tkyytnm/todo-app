@@ -6,8 +6,4 @@ const routes = require("./src/routes");
 loaders(app);
 routes(app);
 
-app.get("/", (req, res) => {
-  res.send("Hello World!");
-});
-
 module.exports = app;

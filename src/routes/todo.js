@@ -9,15 +9,6 @@ const createError = require("http-errors");
  * /api/todo/:
  *  get:
  *    summary: Returns ToDos array by user ID.
- *    parameters:
- *      - name: user_id
- *        in: path
- *        required: true
- *        description: user id.
- *        schema:
- *          type: integer
- *          format: int64
- *          minimum: 1
  *    responses:
  *      '200':
  *        description: Array of ToDos
@@ -55,8 +46,6 @@ router.get("/", async (req, res, next) => {
  *          schema:
  *            type: object
  *            properties:
- *              user_id:
- *                type: integer
  *              body:
  *                type: string
  *    responses:
@@ -75,7 +64,10 @@ router.post("/", async (req, res, next) => {
       throw createError(401, "Please log in.");
     }
     const data = req.body;
-    const response = await ToDoServiceInstance.createToDo(data);
+    const response = await ToDoServiceInstance.createToDo({
+      ...data,
+      user_id: req.user.id,
+    });
     res.status(201).send(response);
   } catch (err) {
     next(err);
@@ -132,7 +124,7 @@ router.put("/", async (req, res, next) => {
  *      - name: id
  *        in: path
  *        required: true
- *        description: An id of ToDo.
+ *        description: ID of the ToDo.
  *        schema:
  *          type: integer
  *    responses:

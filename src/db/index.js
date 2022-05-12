@@ -8,4 +8,7 @@ module.exports = {
   async query(text, params) {
     return await pool.query(text, params);
   },
+  async end() {
+    await pool.end();
+  },
 };
