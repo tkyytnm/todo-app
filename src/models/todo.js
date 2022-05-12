@@ -38,7 +38,7 @@ module.exports = class ToDo {
   }
 
   async deleteToDo(id) {
-    const text = "DELETE FROM todo WHERE id=$1 RETURNING *";
+    const text = "DELETE FROM todos WHERE id=$1 RETURNING *";
     const values = [id];
     const res = await db.query(text, values);
 
@@ -46,5 +46,16 @@ module.exports = class ToDo {
       return res.rows[0];
     }
     return null;
+  }
+
+  async deleteToDosByUser(user_id) {
+    const text = `DELETE FROM todos WHERE user_id=$1 RETURNING *`;
+    const values = [user_id];
+    const res = await db.query(text, values);
+
+    if (res.rows?.length) {
+      return res.rows;
+    }
+    return [];
   }
 };

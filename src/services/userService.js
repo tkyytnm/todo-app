@@ -2,6 +2,8 @@ const UserModel = require("../models/user");
 const UserModelInstance = new UserModel();
 const bcrypt = require("bcrypt");
 const saltRounds = 10;
+const ToDoModel = require("../models/todo");
+const ToDoModelInstance = new ToDoModel();
 
 module.exports = class userService {
   async updateProfile(data) {
@@ -29,6 +31,7 @@ module.exports = class userService {
 
   async deleteUser(id) {
     try {
+      await ToDoModelInstance.deleteToDosByUser(id);
       const response = await UserModelInstance.deleteUser(id);
       return response;
     } catch (err) {
