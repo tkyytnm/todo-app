@@ -4,7 +4,8 @@ module.exports = class User {
   async createUser(data) {
     const { email, password } = data;
     const timestamp = new Date();
-    const text = `INSERT INTO users (email, password, created_at) VALUES ($1, $2, $3) RETURNING *`;
+    const text = `INSERT INTO users (email, password, created_at)
+                  VALUES ($1, $2, $3) RETURNING *`;
     const values = [email, password, timestamp];
     const res = await db.query(text, values);
     if (res.rows?.length) {
