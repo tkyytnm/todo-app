@@ -3,9 +3,9 @@ import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 export const sendUserData = createAsyncThunk(
   "auth/sendUserData",
   async (data) => {
-    const response = await fetch("/api/auth", {
+    const response = await fetch("/api/auth/register", {
       method: "POST",
-      headers: "application/json",
+      headers: { "Content-Type": "application/json" },
       body: JSON.stringify(data),
     });
     return response.json();
