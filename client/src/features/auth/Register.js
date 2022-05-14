@@ -1,12 +1,12 @@
 import { useDispatch } from "react-redux";
-import { sendUserData } from "./authSlice";
+import { registerUser } from "./authSlice";
 
 const Register = () => {
   const dispatch = useDispatch();
   const handleSubmit = (e) => {
     e.preventDefault();
     dispatch(
-      sendUserData({
+      registerUser({
         email: e.target.email.value,
         password: e.target.password.value,
       })
