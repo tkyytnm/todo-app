@@ -27,7 +27,7 @@ describe("Test user routes", () => {
     const res = await request(app)
       .put("/api/user/profile")
       .send({ email: newEmail });
-    expect(res.headers["content-type"]).toMatch(/text/);
+    expect(res.headers["content-type"]).toMatch(/json/);
     expect(res.statusCode).toBe(401);
   });
 
@@ -47,7 +47,7 @@ describe("Test user routes", () => {
     const res = await request(app)
       .put("/api/user/password")
       .send({ password: newPassword });
-    expect(res.headers["content-type"]).toMatch(/text/);
+    expect(res.headers["content-type"]).toMatch(/json/);
     expect(res.statusCode).toBe(401);
   });
 
@@ -63,7 +63,7 @@ describe("Test user routes", () => {
 
   test("DELETE /api/user without cookie", async () => {
     const res = await request(app).delete("/api/user/");
-    expect(res.headers["content-type"]).toMatch(/text/);
+    expect(res.headers["content-type"]).toMatch(/json/);
     expect(res.statusCode).toEqual(401);
   });
 

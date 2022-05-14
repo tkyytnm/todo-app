@@ -36,7 +36,7 @@ describe("Test todo routes", () => {
   test("POST /api/todo without cookie", async () => {
     const res = await request(app).post("/api/todo").send(todo);
     todo.id = res.body.id;
-    expect(res.headers["content-type"]).toMatch(/text/);
+    expect(res.headers["content-type"]).toMatch(/json/);
     expect(res.statusCode).toBe(401);
   });
 
@@ -57,7 +57,7 @@ describe("Test todo routes", () => {
     const res = await request(app)
       .put("/api/todo")
       .send({ id: todo.id, body: newBody, completed: true });
-    expect(res.headers["content-type"]).toMatch(/text/);
+    expect(res.headers["content-type"]).toMatch(/json/);
     expect(res.statusCode).toBe(401);
   });
 
@@ -74,7 +74,7 @@ describe("Test todo routes", () => {
 
   test("GET /api/todo without cookie", async () => {
     const res = await request(app).get("/api/todo");
-    expect(res.headers["content-type"]).toMatch(/text/);
+    expect(res.headers["content-type"]).toMatch(/json/);
     expect(res.statusCode).toBe(401);
   });
 
@@ -89,7 +89,7 @@ describe("Test todo routes", () => {
 
   test("DELETE /api/todo/:id without cookie", async () => {
     const res = await request(app).delete(`/api/todo/${todo.id}`);
-    expect(res.headers["content-type"]).toMatch(/text/);
+    expect(res.headers["content-type"]).toMatch(/json/);
     expect(res.statusCode).toBe(401);
   });
 

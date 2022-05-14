@@ -6,4 +6,9 @@ const routes = require("./src/routes");
 loaders(app);
 routes(app);
 
+// Error handling
+app.use((err, req, res, next) => {
+  res.status(err.statusCode).send(err);
+});
+
 module.exports = app;

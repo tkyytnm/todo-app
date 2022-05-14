@@ -32,13 +32,13 @@ describe("Test auth routes", () => {
 
   test("POST /api/auth/register second time", async () => {
     const res = await request(app).post("/api/auth/register").send(user);
-    expect(res.headers["content-type"]).toMatch(/text/);
+    expect(res.headers["content-type"]).toMatch(/json/);
     expect(res.statusCode).toEqual(409);
   });
 
   test("POST /api/auth/logout without cookie", async () => {
     const res = await request(app).post("/api/auth/logout");
-    expect(res.headers["content-type"]).toMatch(/text/);
+    expect(res.headers["content-type"]).toMatch(/json/);
     expect(res.statusCode).toEqual(401);
   });
 
@@ -46,9 +46,9 @@ describe("Test auth routes", () => {
     const res = await request(app)
       .post("/api/auth/logout")
       .set("cookie", user.cookie);
-    expect(res.headers["content-type"]).toMatch(/text/);
+    expect(res.headers["content-type"]).toMatch(/json/);
     expect(res.statusCode).toEqual(201);
-    expect(res.text).toBe("Logged out.");
+    expect(res.text).toMatch(/Logged out./);
   });
 
   test("POST /api/auth/login", async () => {
