@@ -86,7 +86,34 @@ router.put("/password", async (req, res, next) => {
 
 /**
  * @swagger
- * /api/user/:
+ * /api/user:
+ *  get:
+ *    summary: Get a user data by id if a user logged in.
+ *    responses:
+ *      '200':
+ *        description: An object of user data.
+ *        content:
+ *          application/json:
+ *            schema:
+ *              $ref: '#components/schemas/User'
+ *      '404':
+ *        description: An empty object;
+ */
+router.get("/", async (req, res, next) => {
+  try {
+    if (!req.user) {
+      throw createError(404, "Not logged in.");
+    }
+    const response = await UserServiceInstance.getUserById(req.user.id);
+    res.send(response);
+  } catch (err) {
+    next(err);
+  }
+});
+
+/**
+ * @swagger
+ * /api/user:
  *  delete:
  *    summary: Delete a user.
  *    responses:

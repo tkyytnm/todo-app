@@ -27,7 +27,7 @@ describe("Test todo routes", () => {
   };
 
   test("GET /api/todo before create ToDo", async () => {
-    const res = await request(app).get("/api/todo").set("cookie", user.cookie);
+    const res = await request(app).get("/api/todo").set("Cookie", user.cookie);
     expect(res.headers["content-type"]).toMatch(/json/);
     expect(res.statusCode).toBe(200);
     expect(res.body.length).toBe(0);
@@ -44,7 +44,7 @@ describe("Test todo routes", () => {
     const res = await request(app)
       .post("/api/todo")
       .send(todo)
-      .set("cookie", user.cookie);
+      .set("Cookie", user.cookie);
     todo.id = res.body.id;
     expect(res.headers["content-type"]).toMatch(/json/);
     expect(res.statusCode).toBe(201);
@@ -65,7 +65,7 @@ describe("Test todo routes", () => {
     const res = await request(app)
       .put("/api/todo")
       .send({ id: todo.id, body: newBody, completed: true })
-      .set("cookie", user.cookie);
+      .set("Cookie", user.cookie);
     expect(res.headers["content-type"]).toMatch(/json/);
     expect(res.statusCode).toBe(200);
     expect(res.body.body).toBe(newBody);
@@ -79,7 +79,7 @@ describe("Test todo routes", () => {
   });
 
   test("GET /api/todo", async () => {
-    const res = await request(app).get("/api/todo").set("cookie", user.cookie);
+    const res = await request(app).get("/api/todo").set("Cookie", user.cookie);
     expect(res.headers["content-type"]).toMatch(/json/);
     expect(res.statusCode).toBe(200);
     expect(res.body[res.body.length - 1].id).toBe(todo.id);
@@ -96,7 +96,7 @@ describe("Test todo routes", () => {
   test("DELETE /api/todo/:id", async () => {
     const res = await request(app)
       .delete(`/api/todo/${todo.id}`)
-      .set("cookie", user.cookie);
+      .set("Cookie", user.cookie);
     expect(res.headers["content-type"]).toMatch(/json/);
     expect(res.statusCode).toBe(200);
     expect(res.body.id).toBe(todo.id);
@@ -108,6 +108,6 @@ describe("Test todo routes", () => {
   afterAll(async () => {
     const res = await request(app)
       .delete("/api/user/")
-      .set("cookie", user.cookie);
+      .set("Cookie", user.cookie);
   });
 });

@@ -6,6 +6,15 @@ const ToDoModel = require("../models/todo");
 const ToDoModelInstance = new ToDoModel();
 
 module.exports = class userService {
+  async getUserById(id) {
+    try {
+      const response = await UserModelInstance.findUserById(id);
+      return response;
+    } catch (err) {
+      throw err;
+    }
+  }
+
   async updateProfile(data) {
     try {
       const response = await UserModelInstance.updateProfile(data);

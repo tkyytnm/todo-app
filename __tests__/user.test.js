@@ -21,6 +21,22 @@ describe("Test user routes", () => {
     user.cookie = res.headers["set-cookie"];
   });
 
+  test("GET /api/user without cookie", async () => {
+    const res = await request(app).get("/api/user");
+    expect(res.headers["content-type"]).toMatch(/json/);
+    expect(res.statusCode).toBe(404);
+    expect(res.body.message).toBe("Not logged in.");
+  });
+
+  test("GET /api/user", async () => {
+    const res = await request(app).get("/api/user").set("Cookie", user.cookie);
+    expect(res.headers["content-type"]).toMatch(/json/);
+    expect(res.statusCode).toBe(200);
+    expect(res.body.id).toBe(user.id);
+    expect(res.body.email).toBe(user.email);
+    expect(typeof res.body.password).toBe("string");
+  });
+
   const newEmail = faker.internet.email();
 
   test("PUT /api/user/profile without cookie", async () => {
@@ -34,7 +50,7 @@ describe("Test user routes", () => {
   test("PUT /api/user/profile", async () => {
     const res = await request(app)
       .put("/api/user/profile")
-      .set("cookie", user.cookie)
+      .set("Cookie", user.cookie)
       .send({ email: newEmail });
     expect(res.headers["content-type"]).toMatch(/json/);
     expect(res.statusCode).toBe(200);
@@ -54,7 +70,7 @@ describe("Test user routes", () => {
   test("PUT /api/user/password", async () => {
     const res = await request(app)
       .put("/api/user/password")
-      .set("cookie", user.cookie)
+      .set("Cookie", user.cookie)
       .send({ password: newPassword });
     expect(res.headers["content-type"]).toMatch(/json/);
     expect(res.statusCode).toBe(200);
@@ -70,7 +86,7 @@ describe("Test user routes", () => {
   test("DELETE /api/user", async () => {
     const res = await request(app)
       .delete("/api/user/")
-      .set("cookie", user.cookie);
+      .set("Cookie", user.cookie);
     expect(res.headers["content-type"]).toMatch(/json/);
     expect(res.statusCode).toEqual(200);
     expect(res.body.email).toEqual(newEmail);

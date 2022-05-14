@@ -45,7 +45,7 @@ describe("Test auth routes", () => {
   test("POST /api/auth/logout", async () => {
     const res = await request(app)
       .post("/api/auth/logout")
-      .set("cookie", user.cookie);
+      .set("Cookie", user.cookie);
     expect(res.headers["content-type"]).toMatch(/json/);
     expect(res.statusCode).toEqual(201);
     expect(res.text).toMatch(/Logged out./);
@@ -63,6 +63,6 @@ describe("Test auth routes", () => {
   afterAll(async () => {
     const res = await request(app)
       .delete("/api/user/")
-      .set("cookie", user.cookie);
+      .set("Cookie", user.cookie);
   });
 });
