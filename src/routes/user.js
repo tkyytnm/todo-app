@@ -96,8 +96,6 @@ router.put("/password", async (req, res, next) => {
  *          application/json:
  *            schema:
  *              $ref: '#components/schemas/User'
- *      '404':
- *        description: An empty object;
  */
 router.get("/", async (req, res, next) => {
   try {

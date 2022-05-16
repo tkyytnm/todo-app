@@ -15,10 +15,18 @@ const Nav = () => {
   return (
     <nav>
       <Link to="/">Home</Link>
-      <Link to="/login">Login</Link>
-      <Link to="/register">Register</Link>
-      <button onClick={() => dispatch(logoutUser())}>Logout</button>
-      {user.id && <div>{user.email}</div>}
+      <Link to="todo">ToDo</Link>
+      {user.id ? (
+        <>
+          <div>{user.email}</div>
+          <button onClick={() => dispatch(logoutUser())}>Logout</button>
+        </>
+      ) : (
+        <>
+          <Link to="/login">Login</Link>
+          <Link to="/register">Register</Link>
+        </>
+      )}
     </nav>
   );
 };
