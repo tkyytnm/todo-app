@@ -24,8 +24,8 @@ describe("Test user routes", () => {
   test("GET /api/user without cookie", async () => {
     const res = await request(app).get("/api/user");
     expect(res.headers["content-type"]).toMatch(/json/);
-    expect(res.statusCode).toBe(404);
-    expect(res.body.message).toBe("Not logged in.");
+    expect(res.statusCode).toBe(200);
+    expect(res.body).toEqual({});
   });
 
   test("GET /api/user", async () => {

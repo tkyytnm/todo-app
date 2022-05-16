@@ -102,10 +102,11 @@ router.put("/password", async (req, res, next) => {
 router.get("/", async (req, res, next) => {
   try {
     if (!req.user) {
-      throw createError(404, "Not logged in.");
+      res.send({});
+    } else {
+      const response = await UserServiceInstance.getUserById(req.user.id);
+      res.send(response);
     }
-    const response = await UserServiceInstance.getUserById(req.user.id);
-    res.send(response);
   } catch (err) {
     next(err);
   }
