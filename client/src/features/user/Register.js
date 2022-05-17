@@ -1,13 +1,12 @@
 import { useDispatch } from "react-redux";
-import { loginUser } from "./authSlice";
+import { registerUser } from "./userSlice";
 
-const Login = () => {
+const Register = () => {
   const dispatch = useDispatch();
-
   const handleSubmit = (e) => {
     e.preventDefault();
     dispatch(
-      loginUser({
+      registerUser({
         email: e.target.email.value,
         password: e.target.password.value,
       })
@@ -16,7 +15,7 @@ const Login = () => {
 
   return (
     <>
-      <h2>Login</h2>
+      <h2>Register</h2>
       <form onSubmit={handleSubmit}>
         <div>
           <label htmlFor="email">Email:</label>
@@ -26,10 +25,10 @@ const Login = () => {
           <label htmlFor="password">Password:</label>
           <input type="password" id="password" name="password" required />
         </div>
-        <button>Login</button>
+        <button>Register</button>
       </form>
     </>
   );
 };
 
-export default Login;
+export default Register;

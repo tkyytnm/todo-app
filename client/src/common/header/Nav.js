@@ -1,7 +1,10 @@
 import { Link } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
-import { logoutUser } from "../../features/auth/authSlice";
-import { fetchUserData, selectUser } from "../../features/user/userSlice";
+import {
+  logoutUser,
+  fetchUserData,
+  selectUser,
+} from "../../features/user/userSlice";
 import { useEffect } from "react";
 
 const Nav = () => {
@@ -13,9 +16,7 @@ const Nav = () => {
   }, [dispatch]);
 
   const handleClick = () => {
-    dispatch(logoutUser()).then(() => {
-      dispatch(fetchUserData());
-    });
+    dispatch(logoutUser());
   };
 
   return (
