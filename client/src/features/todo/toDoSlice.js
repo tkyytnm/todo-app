@@ -2,7 +2,7 @@ import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 
 export const fetchToDos = createAsyncThunk("todo/fetchToDos", async () => {
   const response = await fetch("/api/todo");
-  return response.json();
+  return await response.json();
 });
 
 export const addToDo = createAsyncThunk("todo/addToDo", async (data) => {
@@ -13,7 +13,7 @@ export const addToDo = createAsyncThunk("todo/addToDo", async (data) => {
     },
     body: JSON.stringify(data),
   });
-  return response.json();
+  return await response.json();
 });
 
 export const updateToDo = createAsyncThunk("todo/updateToDo", async (data) => {
@@ -24,7 +24,14 @@ export const updateToDo = createAsyncThunk("todo/updateToDo", async (data) => {
     },
     body: JSON.stringify(data),
   });
-  return response.json();
+  return await response.json();
+});
+
+export const deleteToDo = createAsyncThunk("todo/deleteToDo", async (id) => {
+  const response = await fetch(`/api/todo/${id}`, {
+    method: "DELETE",
+  });
+  return await response.json();
 });
 
 const toDoSlice = createSlice({
@@ -69,6 +76,19 @@ const toDoSlice = createSlice({
         state.toDos[index] = action.payload;
       })
       .addCase(updateToDo.rejected, (state, action) => {
+        state.isLoading = false;
+        state.isRejected = true;
+      });
+    builder
+      .addCase(deleteToDo.pending, (state, action) => {
+        state.isLoading = true;
+      })
+      .addCase(deleteToDo.fulfilled, (state, action) => {
+        state.isLoading = false;
+        const index = state.toDos.findIndex((e) => e.id === action.payload.id);
+        state.toDos.splice(index, 1);
+      })
+      .addCase(deleteToDo.rejected, (state, action) => {
         state.isLoading = false;
         state.isRejected = true;
       });

@@ -4,7 +4,7 @@ export const fetchUserData = createAsyncThunk(
   "user/fetchUserData",
   async () => {
     const response = await fetch("/api/user");
-    return response.json();
+    return await response.json();
   }
 );
 

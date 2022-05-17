@@ -10,7 +10,7 @@ export const registerUser = createAsyncThunk(
       },
       body: JSON.stringify(data),
     });
-    return response.json();
+    return await response.json();
   }
 );
 
@@ -22,7 +22,7 @@ export const loginUser = createAsyncThunk("auth/loginUser", async (data) => {
     },
     body: JSON.stringify(data),
   });
-  return response.json();
+  return await response.json();
 });
 
 export const logoutUser = createAsyncThunk("auth/logoutUser", async () => {
@@ -32,7 +32,7 @@ export const logoutUser = createAsyncThunk("auth/logoutUser", async () => {
       "Content-Type": "application/json",
     },
   });
-  return response.json();
+  return await response.json();
 });
 
 const authSlice = createSlice({
