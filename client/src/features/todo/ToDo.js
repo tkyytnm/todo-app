@@ -59,7 +59,7 @@ const ToDo = () => {
                 id="completed"
                 name="completed"
                 defaultChecked={toDo.completed}
-                onBlur={(e) => handleUpdateChange(e, toDo)}
+                onChange={(e) => handleUpdateChange(e, toDo)}
               />
               <input
                 type="text"
