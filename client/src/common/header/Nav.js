@@ -12,6 +12,12 @@ const Nav = () => {
     dispatch(fetchUserData());
   }, [dispatch]);
 
+  const handleClick = () => {
+    dispatch(logoutUser()).then(() => {
+      dispatch(fetchUserData());
+    });
+  };
+
   return (
     <nav>
       <Link to="/">Home</Link>
@@ -19,7 +25,7 @@ const Nav = () => {
       {user.id ? (
         <>
           <div>{user.email}</div>
-          <button onClick={() => dispatch(logoutUser())}>Logout</button>
+          <button onClick={handleClick}>Logout</button>
         </>
       ) : (
         <>

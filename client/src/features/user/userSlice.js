@@ -32,4 +32,4 @@ const userSlice = createSlice({
 });
 
 export default userSlice.reducer;
-export const selectUser = (state) => state.user.user;
+export const selectUser = (state) => state.auth.user || state.user.user;
