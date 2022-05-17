@@ -1,19 +1,17 @@
 import { Link } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
-import {
-  logoutUser,
-  fetchUserData,
-  selectUser,
-} from "../../features/user/userSlice";
+import { logoutUser, selectAuthUser } from "../../features/auth/authSlice";
+import { fetchUserData, selectUser } from "../../features/user/userSlice";
 import { useEffect } from "react";
 
 const Nav = () => {
   const user = useSelector(selectUser);
+  const authUser = useSelector(selectAuthUser);
   const dispatch = useDispatch();
 
   useEffect(() => {
     dispatch(fetchUserData());
-  }, [dispatch]);
+  }, [dispatch, authUser]);
 
   const handleClick = () => {
     dispatch(logoutUser());
