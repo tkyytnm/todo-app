@@ -25,10 +25,22 @@ module.exports = class ToDo {
     return null;
   }
 
-  async updateToDo(data) {
-    const { id, body, completed } = data;
-    const text = `UPDATE todos SET body=$2, completed=$3 WHERE id=$1 RETURNING *`;
-    const values = [id, body, completed];
+  async updateToDoBody(data) {
+    const { id, body } = data;
+    const text = `UPDATE todos SET body=$2 WHERE id=$1 RETURNING *`;
+    const values = [id, body];
+    const res = await db.query(text, values);
+
+    if (res.rows?.length) {
+      return res.rows[0];
+    }
+    return null;
+  }
+
+  async updateToDoCompleted(data) {
+    const { id, completed } = data;
+    const text = `UPDATE todos SET completed=$3 WHERE id=$1 RETURNING *`;
+    const values = [id, completed];
     const res = await db.query(text, values);
 
     if (res.rows?.length) {
