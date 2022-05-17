@@ -16,11 +16,10 @@ const ToDo = () => {
     dispatch(fetchToDos());
   }, [dispatch]);
 
-  const handleUpdateSubmit = (e, toDoObj) => {
-    e.preventDefault();
+  const handleUpdateBlur = (e, toDoObj) => {
     const data = {
       id: toDoObj.id,
-      body: e.target.body.value,
+      body: e.target.value,
       completed: toDoObj.completed,
     };
     dispatch(updateToDo(data));
@@ -55,24 +54,20 @@ const ToDo = () => {
         {toDos.map((toDo) => {
           return (
             <li key={toDo.id}>
-              <form>
-                <input
-                  type="checkbox"
-                  id="completed"
-                  name="completed"
-                  defaultChecked={toDo.completed}
-                  onChange={(e) => handleUpdateChange(e, toDo)}
-                />
-              </form>
-              <form onSubmit={(e) => handleUpdateSubmit(e, toDo)}>
-                <input
-                  type="text"
-                  defaultValue={toDo.body}
-                  id="body"
-                  name="body"
-                />
-                <button>Update</button>
-              </form>
+              <input
+                type="checkbox"
+                id="completed"
+                name="completed"
+                defaultChecked={toDo.completed}
+                onBlur={(e) => handleUpdateChange(e, toDo)}
+              />
+              <input
+                type="text"
+                defaultValue={toDo.body}
+                id="body"
+                name="body"
+                onBlur={(e) => handleUpdateBlur(e, toDo)}
+              />
               <button onClick={() => handleDeleteClick(toDo.id)}>Delete</button>
             </li>
           );
