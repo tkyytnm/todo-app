@@ -76,9 +76,9 @@ router.post("/", async (req, res, next) => {
 
 /**
  * @swagger
- * /api/todo/body:
+ * /api/todo:
  *  put:
- *    summary: Update a ToDo body.
+ *    summary: Update a ToDo.
  *    requestBody:
  *      required: true
  *      content:
@@ -90,43 +90,6 @@ router.post("/", async (req, res, next) => {
  *                type: integer
  *              body:
  *                type: string
- *    responses:
- *      '200':
- *        description: Updated and return object.
- *        content:
- *          application/json:
- *            schema:
- *              $ref: '#/components/schemas/ToDo'
- *      '401':
- *        description: Unauthorized error.
- */
-router.put("/body", async (req, res, next) => {
-  try {
-    if (!req.user) {
-      throw createError(401, "Please log in.");
-    }
-    const data = req.body;
-    const response = await ToDoServiceInstance.updateToDoBody(data);
-    res.send(response);
-  } catch (err) {
-    next(err);
-  }
-});
-
-/**
- * @swagger
- * /api/todo/completed:
- *  put:
- *    summary: Update a ToDo completed.
- *    requestBody:
- *      required: true
- *      content:
- *        application/json:
- *          schema:
- *            type: object
- *            properties:
- *              id:
- *                type: integer
  *              completed:
  *                type: boolean
  *    responses:
@@ -139,13 +102,13 @@ router.put("/body", async (req, res, next) => {
  *      '401':
  *        description: Unauthorized error.
  */
- router.put("/completed", async (req, res, next) => {
+router.put("/", async (req, res, next) => {
   try {
     if (!req.user) {
       throw createError(401, "Please log in.");
     }
     const data = req.body;
-    const response = await ToDoServiceInstance.updateToDoCompleted(data);
+    const response = await ToDoServiceInstance.updateToDo(data);
     res.send(response);
   } catch (err) {
     next(err);

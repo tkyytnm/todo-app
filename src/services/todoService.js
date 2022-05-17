@@ -20,18 +20,9 @@ module.exports = class ToDoService {
     }
   }
 
-  async updateToDoBody(data) {
+  async updateToDo(data) {
     try {
-      const response = await ToDoModelInstance.updateToDoBody(data);
-      return response;
-    } catch (err) {
-      throw err;
-    }
-  }
-
-  async updateToDoCompleted(data) {
-    try {
-      const response = await ToDoModelInstance.updateToDoCompleted(data);
+      const response = await ToDoModelInstance.updateToDo(data);
       return response;
     } catch (err) {
       throw err;

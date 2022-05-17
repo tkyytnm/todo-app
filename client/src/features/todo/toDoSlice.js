@@ -41,7 +41,7 @@ const toDoSlice = createSlice({
       })
       .addCase(fetchToDos.fulfilled, (state, action) => {
         state.isLoading = false;
-        state.toDos = action.payload;
+        state.toDos = action.payload.sort((a, b) => a.id - b.id);
       })
       .addCase(fetchToDos.rejected, (state, action) => {
         state.isLoading = false;
@@ -65,7 +65,8 @@ const toDoSlice = createSlice({
       })
       .addCase(updateToDo.fulfilled, (state, action) => {
         state.isLoading = false;
-        state.toDos = action.payload;
+        const index = state.toDos.findIndex((e) => e.id === action.payload.id);
+        state.toDos[index] = action.payload;
       })
       .addCase(updateToDo.rejected, (state, action) => {
         state.isLoading = false;

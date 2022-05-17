@@ -1,24 +1,32 @@
 import { useDispatch, useSelector } from "react-redux";
 import { fetchToDos, selectToDos, updateToDo } from "./toDoSlice";
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 
 const ToDo = () => {
   const dispatch = useDispatch();
   const toDos = useSelector(selectToDos);
-  const [toDo, setToDo] = useState({});
 
   useEffect(() => {
     dispatch(fetchToDos());
   }, [dispatch]);
 
-  const handleInputChange = (e, id) => {
-    console.log(e);
-    setToDo({
-      id,
-      body: e.target.value,
-      completed: e.target.value,
-    });
-    dispatch(updateToDo(toDo));
+  const handleSubmit = (e, toDoObj) => {
+    e.preventDefault();
+    const data = {
+      id: toDoObj.id,
+      body: e.target.body.value,
+      completed: toDoObj.completed,
+    };
+    dispatch(updateToDo(data));
+  };
+
+  const handleChange = (e, toDoObj) => {
+    const data = {
+      id: toDoObj.id,
+      body: toDoObj.body,
+      completed: e.target.checked,
+    };
+    dispatch(updateToDo(data));
   };
 
   return (
@@ -33,16 +41,18 @@ const ToDo = () => {
                   type="checkbox"
                   id="completed"
                   name="completed"
-                  checked={toDo.completed}
-                  onChange={(e) => handleInputChange(e, toDo.id)}
+                  defaultChecked={toDo.completed}
+                  onChange={(e) => handleChange(e, toDo)}
                 />
+              </form>
+              <form onSubmit={(e) => handleSubmit(e, toDo)}>
                 <input
                   type="text"
-                  value={toDo.body}
+                  defaultValue={toDo.body}
                   id="body"
                   name="body"
-                  onChange={(e) => handleInputChange(e, toDo.id)}
                 />
+                <button>Send</button>
               </form>
             </li>
           );
