@@ -18,12 +18,14 @@ const ToDoList = () => {
   }, [dispatch]);
 
   const handleUpdateBlur = (e, toDoObj) => {
-    const data = {
-      id: toDoObj.id,
-      body: e.target.value,
-      completed: toDoObj.completed,
-    };
-    dispatch(updateToDo(data));
+    if (toDoObj.body !== e.target.value) {
+      const data = {
+        id: toDoObj.id,
+        body: e.target.value,
+        completed: toDoObj.completed,
+      };
+      dispatch(updateToDo(data));
+    }
   };
 
   const handleDeleteClick = (id) => {
