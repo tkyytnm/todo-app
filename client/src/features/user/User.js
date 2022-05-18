@@ -1,20 +1,14 @@
 import {
   selectUser,
-  fetchUserData,
   updateProfile,
   updatePassword,
   deleteUser,
 } from "./userSlice";
 import { useDispatch, useSelector } from "react-redux";
-import { useEffect } from "react";
 
 const User = () => {
   const dispatch = useDispatch();
   const user = useSelector(selectUser);
-
-  // useEffect(() => {
-  //   dispatch(fetchUserData());
-  // }, [dispatch, user.id]);
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -26,7 +20,7 @@ const User = () => {
   };
 
   const handleClick = () => {
-    const confirm = window.confirm("Are you sure deleting account?");
+    const confirm = window.confirm("Are you sure you want to delete account?");
     if (confirm) {
       dispatch(deleteUser());
     }

@@ -6,6 +6,7 @@ import Register from "../features/auth/Register";
 import Login from "../features/auth/Login";
 import ToDo from "../features/todo/ToDo";
 import User from "../features/user/User";
+import RequireAuth from "../features/auth/RequireAuth";
 
 function App() {
   return (
@@ -17,8 +18,23 @@ function App() {
             <Route index element={<>Index</>} />
             <Route path="register" element={<Register />} />
             <Route path="login" element={<Login />} />
-            <Route path="todo" element={<ToDo />} />
-            <Route path="user" element={<User />} />
+
+            <Route
+              path="todo"
+              element={
+                <RequireAuth>
+                  <ToDo />
+                </RequireAuth>
+              }
+            />
+            <Route
+              path="user"
+              element={
+                <RequireAuth>
+                  <User />
+                </RequireAuth>
+              }
+            />
           </Route>
         </Routes>
       </section>
