@@ -1,5 +1,5 @@
 import "./App.css";
-import { BrowserRouter, Routes, Route } from "react-router-dom";
+import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
 import Header from "../common/header/Header";
 import Footer from "../common/footer/Footer";
 import Register from "../features/auth/Register";
@@ -15,10 +15,9 @@ function App() {
       <section>
         <Routes>
           <Route path="/">
-            <Route index element={<>Index</>} />
+            <Route index element={<Navigate to="todo" replace />} />
             <Route path="register" element={<Register />} />
             <Route path="login" element={<Login />} />
-
             <Route
               path="todo"
               element={

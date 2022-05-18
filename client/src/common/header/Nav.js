@@ -1,17 +1,21 @@
 import { Link } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
-import { logoutUser, selectAuthUser } from "../../features/auth/authSlice";
-import { fetchUserData, selectUser } from "../../features/user/userSlice";
+import {
+  logoutUser,
+  fetchAuthUserData,
+  selectAuthUser,
+} from "../../features/auth/authSlice";
+import { selectUser } from "../../features/user/userSlice";
 import { useEffect } from "react";
 
 const Nav = () => {
-  const user = useSelector(selectUser);
   const authUser = useSelector(selectAuthUser);
+  const user = useSelector(selectUser);
   const dispatch = useDispatch();
 
   useEffect(() => {
-    dispatch(fetchUserData());
-  }, [dispatch, authUser]);
+    dispatch(fetchAuthUserData());
+  }, [dispatch, user]);
 
   const handleClick = () => {
     dispatch(logoutUser());
@@ -19,12 +23,10 @@ const Nav = () => {
 
   return (
     <nav>
-      <Link to="/">Home</Link>
-
-      {user.id ? (
+      {authUser.id ? (
         <>
           <Link to="todo">ToDo</Link>
-          <Link to="user">{user.email}</Link>
+          <Link to="user">{authUser.email}</Link>
           <button onClick={handleClick}>Logout</button>
         </>
       ) : (

@@ -1,10 +1,17 @@
 import { useDispatch, useSelector } from "react-redux";
-import { fetchToDos, selectToDos, updateToDo, deleteToDo } from "./toDoSlice";
+import {
+  fetchToDos,
+  selectToDos,
+  updateToDo,
+  deleteToDo,
+  selectIsLoading,
+} from "./toDoSlice";
 import { useEffect } from "react";
 
 const ToDoList = () => {
   const dispatch = useDispatch();
   const toDos = useSelector(selectToDos);
+  const isLoading = useSelector(selectIsLoading);
 
   useEffect(() => {
     dispatch(fetchToDos());
@@ -51,7 +58,12 @@ const ToDoList = () => {
               name="body"
               onBlur={(e) => handleUpdateBlur(e, toDo)}
             />
-            <button onClick={() => handleDeleteClick(toDo.id)}>Delete</button>
+            <button
+              onClick={() => handleDeleteClick(toDo.id)}
+              disabled={isLoading}
+            >
+              Delete
+            </button>
           </li>
         );
       })}

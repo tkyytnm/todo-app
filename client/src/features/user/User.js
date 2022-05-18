@@ -3,12 +3,20 @@ import {
   updateProfile,
   updatePassword,
   deleteUser,
+  fetchUserData,
+  selectIsLoading,
 } from "./userSlice";
 import { useDispatch, useSelector } from "react-redux";
+import { useEffect } from "react";
 
 const User = () => {
   const dispatch = useDispatch();
   const user = useSelector(selectUser);
+  const isLoading = useSelector(selectIsLoading);
+
+  useEffect(() => {
+    dispatch(fetchUserData());
+  }, [dispatch]);
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -38,7 +46,7 @@ const User = () => {
           defaultValue={user.email}
           required
         />
-        <button>Update</button>
+        <button disabled={isLoading}>Update</button>
       </form>
       <h3>Change password</h3>
       <form onSubmit={handleSubmit}>
@@ -49,10 +57,12 @@ const User = () => {
           defaultValue=""
           required
         />
-        <button>Update</button>
+        <button disabled={isLoading}>Update</button>
       </form>
       <h3>Delete user account</h3>
-      <button onClick={handleClick}>Delete</button>
+      <button onClick={handleClick} disabled={isLoading}>
+        Delete
+      </button>
     </>
   );
 };

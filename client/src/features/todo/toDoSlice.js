@@ -97,3 +97,4 @@ const toDoSlice = createSlice({
 
 export default toDoSlice.reducer;
 export const selectToDos = (state) => state.todo.toDos;
+export const selectIsLoading = (state) => state.todo.isLoading;

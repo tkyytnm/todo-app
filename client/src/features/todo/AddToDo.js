@@ -1,8 +1,9 @@
-import { useDispatch } from "react-redux";
-import { addToDo } from "./toDoSlice";
+import { useDispatch, useSelector } from "react-redux";
+import { addToDo, selectIsLoading } from "./toDoSlice";
 
 const AddToDo = () => {
   const dispatch = useDispatch();
+  const isLoading = useSelector(selectIsLoading);
 
   const handleAddSubmit = (e) => {
     e.preventDefault();
@@ -17,7 +18,7 @@ const AddToDo = () => {
     <li>
       <form onSubmit={handleAddSubmit}>
         <input type="text" id="body" name="body" />
-        <button>Add</button>
+        <button disabled={isLoading}>Add</button>
       </form>
     </li>
   );

@@ -1,8 +1,11 @@
-import { useDispatch } from "react-redux";
-import { loginUser } from "./authSlice";
+import { useDispatch, useSelector } from "react-redux";
+import { loginUser, selectIsLoading } from "./authSlice";
+import { useNavigate } from "react-router-dom";
 
 const Login = () => {
   const dispatch = useDispatch();
+  const isLoading = useSelector(selectIsLoading);
+  const navigate = useNavigate();
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -11,7 +14,9 @@ const Login = () => {
         email: e.target.email.value,
         password: e.target.password.value,
       })
-    );
+    )
+      .then(() => navigate("/todo", { replace: true }))
+      .catch((err) => console.log(err));
   };
 
   return (
@@ -26,7 +31,7 @@ const Login = () => {
           <label htmlFor="password">Password:</label>
           <input type="password" id="password" name="password" required />
         </div>
-        <button>Login</button>
+        <button disabled={isLoading}>Login</button>
       </form>
     </>
   );

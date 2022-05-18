@@ -1,8 +1,10 @@
-import { useDispatch } from "react-redux";
-import { registerUser } from "./authSlice";
+import { useDispatch, useSelector } from "react-redux";
+import { registerUser, selectIsLoading } from "./authSlice";
 
 const Register = () => {
   const dispatch = useDispatch();
+  const isLoading = useSelector(selectIsLoading);
+
   const handleSubmit = (e) => {
     e.preventDefault();
     dispatch(
@@ -25,7 +27,7 @@ const Register = () => {
           <label htmlFor="password">Password:</label>
           <input type="password" id="password" name="password" required />
         </div>
-        <button>Register</button>
+        <button disabled={isLoading}>Register</button>
       </form>
     </>
   );
