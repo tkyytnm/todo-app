@@ -24,7 +24,7 @@ const Nav = () => {
       {user.id ? (
         <>
           <Link to="todo">ToDo</Link>
-          <div>{user.email}</div>
+          <Link to="user">{user.email}</Link>
           <button onClick={handleClick}>Logout</button>
         </>
       ) : (

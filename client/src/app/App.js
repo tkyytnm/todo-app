@@ -5,6 +5,7 @@ import Footer from "../common/footer/Footer";
 import Register from "../features/auth/Register";
 import Login from "../features/auth/Login";
 import ToDo from "../features/todo/ToDo";
+import User from "../features/user/User";
 
 function App() {
   return (
@@ -17,6 +18,7 @@ function App() {
             <Route path="register" element={<Register />} />
             <Route path="login" element={<Login />} />
             <Route path="todo" element={<ToDo />} />
+            <Route path="user" element={<User />} />
           </Route>
         </Routes>
       </section>
