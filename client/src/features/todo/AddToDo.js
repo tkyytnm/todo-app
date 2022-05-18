@@ -1,6 +1,5 @@
 import { useDispatch, useSelector } from "react-redux";
 import { addToDo, selectIsLoading } from "./toDoSlice";
-import { GrAdd } from "react-icons/gr";
 
 const AddToDo = () => {
   const dispatch = useDispatch();
@@ -16,12 +15,9 @@ const AddToDo = () => {
   };
 
   return (
-    <li id="add-todo">
+    <li>
       <form onSubmit={handleAddSubmit}>
-        <label htmlFor="add-body">
-          <GrAdd />
-        </label>
-        <input type="text" id="add-body" name="body" />
+        <input type="text" id="body" name="body" />
         <button disabled={isLoading}>Add</button>
       </form>
     </li>

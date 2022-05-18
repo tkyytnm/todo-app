@@ -10,7 +10,7 @@ import { useEffect } from "react";
 
 const Nav = () => {
   const authUser = useSelector(selectAuthUser);
-  const user = useSelector(selectUser)
+  const user = useSelector(selectUser);
   const dispatch = useDispatch();
 
   useEffect(() => {

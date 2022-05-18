@@ -5,7 +5,7 @@ const ToDo = () => {
   return (
     <>
       <h2>ToDo List</h2>
-      <ul id="todo">
+      <ul>
         <ToDoList />
         <AddToDo />
       </ul>
