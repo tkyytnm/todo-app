@@ -20,9 +20,10 @@ const Nav = () => {
   return (
     <nav>
       <Link to="/">Home</Link>
-      <Link to="todo">ToDo</Link>
+
       {user.id ? (
         <>
+          <Link to="todo">ToDo</Link>
           <div>{user.email}</div>
           <button onClick={handleClick}>Logout</button>
         </>
