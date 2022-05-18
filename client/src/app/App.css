@@ -7,8 +7,38 @@ nav {
 }
 
 section {
-  width: 500px;
+  width: 100%;
+  max-width: 500px;
   margin: 100px auto;
+}
+
+ul#todo {
+  padding: 0;
+  border-bottom: 1px solid #ccc;
+}
+
+ul#todo li {
+  list-style-type: none;
+  border-top: 1px solid #ccc;
+  padding: 5px 10px;
+}
+
+input[type="checkbox"]#completed {
+  height: 18px;
+  width: 18px;
+  cursor: pointer;
+  vertical-align: bottom;
+  background-color: red;
+}
+
+input[type="text"]#body,
+input[type="text"]#add-body {
+  border: none;
+}
+
+ul#todo li#add-todo label svg {
+  margin: 0 4px;
+  vertical-align: text-bottom;
 }
 
 footer {
