@@ -12,8 +12,8 @@ import { useEffect } from "react";
 const ToDoList = () => {
   const dispatch = useDispatch();
   const toDos = useSelector(selectToDos);
-  const authUser = useSelector(selectToDos);
   const isLoading = useSelector(selectIsLoading);
+  const authUser = useSelector(selectAuthUser);
 
   useEffect(() => {
     dispatch(fetchToDos());
@@ -43,9 +43,17 @@ const ToDoList = () => {
     dispatch(updateToDo(data));
   };
 
+  const filterToDos = (toDos) => {
+    if (authUser.visibility) {
+      return toDos;
+    } else {
+      return toDos.filter((toDo) => !toDo.completed);
+    }
+  };
+
   return (
     <>
-      {toDos.map((toDo) => {
+      {filterToDos(toDos).map((toDo) => {
         return (
           <li key={toDo.id}>
             <input
@@ -60,7 +68,7 @@ const ToDoList = () => {
               defaultValue={toDo.body}
               id="body"
               name="body"
-              className={toDo.completed && "completed"}
+              className={toDo.completed ? "completed" : ""}
               onBlur={(e) => handleUpdateBlur(e, toDo)}
             />
             <button

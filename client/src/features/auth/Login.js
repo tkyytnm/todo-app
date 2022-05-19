@@ -39,7 +39,7 @@ const Login = () => {
           <label htmlFor="password">Password:</label>
           <input type="password" id="password" name="password" required />
         </div>
-        <button disabled={isLoading} class="positive">
+        <button disabled={isLoading} className="positive">
           Login
         </button>
       </form>

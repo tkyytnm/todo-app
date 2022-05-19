@@ -8,6 +8,20 @@ export const fetchUserData = createAsyncThunk(
   }
 );
 
+export const updateVisibility = createAsyncThunk(
+  "user/updateVisibility",
+  async (data) => {
+    const response = await fetch("/api/user/visibility", {
+      method: "PUT",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(data),
+    });
+    return await response.json();
+  }
+);
+
 export const updateProfile = createAsyncThunk(
   "user/updateProfile",
   async (data) => {
@@ -60,6 +74,18 @@ const userSlice = createSlice({
         state.user = action.payload;
       })
       .addCase(fetchUserData.rejected, (state, action) => {
+        state.isLoading = false;
+        state.isRejected = true;
+      });
+    builder
+      .addCase(updateVisibility.pending, (state, action) => {
+        state.isLoading = true;
+      })
+      .addCase(updateVisibility.fulfilled, (state, action) => {
+        state.isLoading = false;
+        state.user = action.payload;
+      })
+      .addCase(updateVisibility.rejected, (state, action) => {
         state.isLoading = false;
         state.isRejected = true;
       });
