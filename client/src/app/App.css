@@ -8,7 +8,12 @@ h1 {
 
 nav {
   display: flex;
-  justify-content: space-evenly;
+  justify-content: center;
+}
+
+nav a,
+nav button {
+  margin: 0 25px;
 }
 
 nav svg {
@@ -19,19 +24,28 @@ nav svg {
 }
 
 section {
-  width: 500px;
-  margin: 100px auto;
+  margin: 40px auto;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
 }
 
 #todo {
   padding: 0;
-  border-bottom: 1px solid #ccc;
+  box-shadow: 0px 0px 15px rgba(0, 0, 0, 0.2);
+  padding: 20px;
+  margin: 10px auto;
 }
 
 #todo li {
   list-style-type: none;
   padding: 5px;
-  border-top: 1px solid #ccc;
+  border-top: 1px solid #eee;
+}
+
+#todo li:last-of-type {
+  border-bottom: 1px solid #eee;
 }
 
 #todo input[type="checkbox"] {
@@ -44,7 +58,7 @@ section {
 #todo input[type="text"] {
   border: none;
   margin-right: 5px;
-  width: 390px;
+  width: 300px;
   vertical-align: text-bottom;
 }
 
@@ -102,19 +116,36 @@ button.delete {
 button.logout {
   display: inline-block;
   padding: 3px 5px;
-  font-size: 16px;
+  font-size: 14px;
   cursor: pointer;
   text-align: center;
   text-decoration: underline;
   outline: none;
-  color: #333;
+  color: #999;
   border: none;
   border-radius: 5px;
   background: none;
 }
 
-form div {
-  margin: 10px 0;
+form table {
+  text-align: center;
+  box-shadow: 0px 0px 15px rgba(0, 0, 0, 0.2);
+  padding: 20px 30px;
+  margin: 30px auto;
+}
+form td {
+  padding: 5px 2px;
+}
+
+.profile {
+  text-align: center;
+  box-shadow: 0px 0px 15px rgba(0, 0, 0, 0.2);
+  padding: 20px 40px 50px;
+  margin: 30px auto;
+}
+
+.profile form {
+  margin-bottom: 50px;
 }
 
 footer {

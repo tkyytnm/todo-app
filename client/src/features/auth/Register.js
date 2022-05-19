@@ -29,17 +29,31 @@ const Register = () => {
     <>
       <h2>Register</h2>
       <form onSubmit={handleSubmit}>
-        <div>
-          <label htmlFor="email">Email:</label>
-          <input type="email" id="email" name="email" required />
-        </div>
-        <div>
-          <label htmlFor="password">Password:</label>
-          <input type="password" id="password" name="password" required />
-        </div>
-        <button disabled={isLoading} className="positive">
-          Register
-        </button>
+        <table>
+          <tr>
+            <td>
+              <label htmlFor="email">Email:</label>
+            </td>
+            <td>
+              <input type="email" id="email" name="email" required />
+            </td>
+          </tr>
+          <tr>
+            <td>
+              <label htmlFor="password">Password:</label>
+            </td>
+            <td>
+              <input type="password" id="password" name="password" required />
+            </td>
+          </tr>
+          <tr>
+            <td colSpan="2">
+              <button disabled={isLoading} className="positive">
+                Register
+              </button>
+            </td>
+          </tr>
+        </table>
       </form>
     </>
   );
