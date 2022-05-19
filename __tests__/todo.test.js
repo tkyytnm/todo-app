@@ -16,7 +16,9 @@ afterAll(() => {
 
 describe("Test todo routes", () => {
   beforeAll(async () => {
-    const res = await request(app).post("/api/auth/register").send(user);
+    const res = await request(app)
+      .post("/api/auth/register")
+      .send({ email: user.email, password: user.password });
     user.id = res.body.id;
     user.cookie = res.headers["set-cookie"];
   });

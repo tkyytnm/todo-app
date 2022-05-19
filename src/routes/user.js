@@ -6,6 +6,46 @@ const createError = require("http-errors");
 
 /**
  * @swagger
+ * /api/user/visibility:
+ *  put:
+ *    summary: Update a user visibility.
+ *    requestBody:
+ *      required: true
+ *      content:
+ *        application/json:
+ *          schema:
+ *            type: object
+ *            properties:
+ *              visibility:
+ *                type: boolean
+ *    responses:
+ *      '200':
+ *        description: An object of user data.
+ *        content:
+ *          application/json:
+ *            schema:
+ *              $ref: '#components/schemas/User'
+ *      '401':
+ *        description: Unauthorized error.
+ */
+router.put("/visibility", async (req, res, next) => {
+  try {
+    if (!req.user) {
+      createError(401, "Please log in.");
+    }
+    const data = req.body;
+    const response = await UserServiceInstance.updateVisibility({
+      ...data,
+      id: req.user.id,
+    });
+    res.send(response);
+  } catch (err) {
+    next(err);
+  }
+});
+
+/**
+ * @swagger
  * /api/user/profile:
  *  put:
  *    summary: Update a user profile.

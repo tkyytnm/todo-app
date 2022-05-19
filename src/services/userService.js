@@ -15,6 +15,15 @@ module.exports = class userService {
     }
   }
 
+  async updateVisibility(data) {
+    try {
+      const response = await UserModelInstance.updateVisibility(data);
+      return response;
+    } catch (err) {
+      throw err;
+    }
+  }
+
   async updateProfile(data) {
     try {
       const response = await UserModelInstance.updateProfile(data);

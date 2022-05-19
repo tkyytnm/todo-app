@@ -11,6 +11,7 @@ const user = {
   id: null,
   email: faker.internet.email(),
   password: faker.internet.password(),
+  visibility: true,
   cookie: "",
 };
 
@@ -21,7 +22,9 @@ describe("Test auth routes", () => {
   });
 
   test("POST /api/auth/register", async () => {
-    const res = await request(app).post("/api/auth/register").send(user);
+    const res = await request(app)
+      .post("/api/auth/register")
+      .send({ email: user.email, password: user.password });
     user.id = res.body.id;
     user.cookie = res.headers["set-cookie"];
     expect(res.headers["content-type"]).toMatch(/json/);

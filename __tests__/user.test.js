@@ -11,12 +11,15 @@ const user = {
   id: null,
   email: faker.internet.email(),
   password: faker.internet.password(),
+  visibility: true,
   cookie: "",
 };
 
 describe("Test user routes", () => {
   beforeAll(async () => {
-    const res = await request(app).post("/api/auth/register").send(user);
+    const res = await request(app)
+      .post("/api/auth/register")
+      .send({ email: user.email, password: user.password });
     user.id = res.body.id;
     user.cookie = res.headers["set-cookie"];
   });
@@ -75,6 +78,16 @@ describe("Test user routes", () => {
     expect(res.headers["content-type"]).toMatch(/json/);
     expect(res.statusCode).toBe(200);
     expect(typeof res.body.password).toBe("string");
+  });
+
+  test("PUT /api/user/visibility", async () => {
+    const res = await request(app)
+      .put("/api/user/visibility")
+      .set("Cookie", user.cookie)
+      .send({ visibility: !user.visibility });
+    expect(res.headers["content-type"]).toMatch(/json/);
+    expect(res.statusCode).toBe(200);
+    expect(res.body.visibility).toBe(!user.visibility);
   });
 
   test("DELETE /api/user without cookie", async () => {

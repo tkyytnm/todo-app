@@ -3,10 +3,22 @@ const db = require("../db");
 module.exports = class User {
   async createUser(data) {
     const { email, password } = data;
+    const visibility = true;
     const timestamp = new Date();
-    const text = `INSERT INTO users (email, password, created_at)
-                  VALUES ($1, $2, $3) RETURNING *`;
-    const values = [email, password, timestamp];
+    const text = `INSERT INTO users (email, password, visibility, created_at)
+                  VALUES ($1, $2, $3, $4) RETURNING *`;
+    const values = [email, password, visibility, timestamp];
+    const res = await db.query(text, values);
+    if (res.rows?.length) {
+      return res.rows[0];
+    }
+    return null;
+  }
+
+  async updateVisibility(data) {
+    const { id, visibility } = data;
+    const text = `UPDATE users SET visibility=$2 WHERE id=$1 RETURNING *`;
+    const values = [id, visibility];
     const res = await db.query(text, values);
     if (res.rows?.length) {
       return res.rows[0];
