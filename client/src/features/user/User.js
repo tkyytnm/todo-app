@@ -36,7 +36,7 @@ const User = () => {
 
   return (
     <>
-      <h2>User preference</h2>
+      <h2>User profile</h2>
       <h3>Change email</h3>
       <form onSubmit={handleSubmit}>
         <input
@@ -46,7 +46,7 @@ const User = () => {
           defaultValue={user.email}
           required
         />
-        <button disabled={isLoading}>Update</button>
+        <button disabled={isLoading} className="update">Update</button>
       </form>
       <h3>Change password</h3>
       <form onSubmit={handleSubmit}>
@@ -57,10 +57,10 @@ const User = () => {
           defaultValue=""
           required
         />
-        <button disabled={isLoading}>Update</button>
+        <button disabled={isLoading} className="update">Update</button>
       </form>
       <h3>Delete user account</h3>
-      <button onClick={handleClick} disabled={isLoading}>
+      <button onClick={handleClick} disabled={isLoading} className="delete">
         Delete
       </button>
     </>

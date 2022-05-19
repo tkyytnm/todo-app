@@ -1,9 +1,21 @@
+a {
+  color: #333;
+}
+
 h1 {
   text-align: center;
 }
+
 nav {
   display: flex;
   justify-content: space-evenly;
+}
+
+nav svg {
+  width: 18px;
+  height: 18px;
+  vertical-align: text-bottom;
+  margin-right: 2px;
 }
 
 section {
@@ -13,6 +25,7 @@ section {
 
 #todo {
   padding: 0;
+  border-bottom: 1px solid #ccc;
 }
 
 #todo li {
@@ -32,6 +45,16 @@ section {
   border: none;
   margin-right: 5px;
   width: 390px;
+  vertical-align: text-bottom;
+}
+
+#todo input[type="text"].completed {
+  color: #999;
+  text-decoration: line-through;
+}
+
+#todo input[type="text"]:focus {
+  outline: none;
 }
 
 #todo svg {
@@ -39,7 +62,62 @@ section {
   vertical-align: text-bottom;
 }
 
+input[type="text"],
+input[type="email"],
+input[type="password"] {
+  margin-right: 2px;
+  padding: 2px;
+}
+
+button {
+  display: inline-block;
+  padding: 3px 5px;
+  font-size: 14px;
+  cursor: pointer;
+  text-align: center;
+  text-decoration: none;
+  outline: none;
+  color: #fff;
+  border: none;
+  border-radius: 5px;
+  vertical-align: text-bottom;
+}
+
+#todo button {
+  font-size: 12px;
+}
+
+button.add,
+button.update,
+button.positive {
+  background-color: #14c38e;
+  box-shadow: 0 3px #36ae7c;
+}
+
+button.delete {
+  background-color: #ff4949;
+  box-shadow: 0 3px #eb5353;
+}
+
+button.logout {
+  display: inline-block;
+  padding: 3px 5px;
+  font-size: 16px;
+  cursor: pointer;
+  text-align: center;
+  text-decoration: underline;
+  outline: none;
+  color: #333;
+  border: none;
+  border-radius: 5px;
+  background: none;
+}
+
+form div {
+  margin: 10px 0;
+}
+
 footer {
   text-align: center;
-  color: #999999;
+  color: #999;
 }

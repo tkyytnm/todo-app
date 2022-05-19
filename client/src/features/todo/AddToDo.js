@@ -22,7 +22,9 @@ const AddToDo = () => {
           <GrAdd />
         </label>
         <input type="text" id="add-body" name="body" />
-        <button disabled={isLoading}>Add</button>
+        <button disabled={isLoading} className="add">
+          Add
+        </button>
       </form>
     </li>
   );

@@ -7,6 +7,7 @@ import {
 } from "../../features/auth/authSlice";
 import { selectUser } from "../../features/user/userSlice";
 import { useEffect } from "react";
+import { FiSettings } from "react-icons/fi";
 
 const Nav = () => {
   const authUser = useSelector(selectAuthUser);
@@ -26,8 +27,13 @@ const Nav = () => {
       {authUser.id ? (
         <>
           <Link to="todo">ToDo</Link>
-          <Link to="user">{authUser.email}</Link>
-          <button onClick={handleClick}>Logout</button>
+          <Link to="user">
+            <FiSettings />
+            {authUser.email}
+          </Link>
+          <button onClick={handleClick} className="logout">
+            Logout
+          </button>
         </>
       ) : (
         <>

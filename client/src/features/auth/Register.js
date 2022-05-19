@@ -27,7 +27,9 @@ const Register = () => {
           <label htmlFor="password">Password:</label>
           <input type="password" id="password" name="password" required />
         </div>
-        <button disabled={isLoading}>Register</button>
+        <button disabled={isLoading} class="positive">
+          Register
+        </button>
       </form>
     </>
   );

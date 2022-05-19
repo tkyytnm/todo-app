@@ -6,11 +6,13 @@ import {
   deleteToDo,
   selectIsLoading,
 } from "./toDoSlice";
+import { selectAuthUser } from "../auth/authSlice";
 import { useEffect } from "react";
 
 const ToDoList = () => {
   const dispatch = useDispatch();
   const toDos = useSelector(selectToDos);
+  const authUser = useSelector(selectToDos);
   const isLoading = useSelector(selectIsLoading);
 
   useEffect(() => {
@@ -58,11 +60,13 @@ const ToDoList = () => {
               defaultValue={toDo.body}
               id="body"
               name="body"
+              className={toDo.completed && "completed"}
               onBlur={(e) => handleUpdateBlur(e, toDo)}
             />
             <button
               onClick={() => handleDeleteClick(toDo.id)}
               disabled={isLoading}
+              className="delete"
             >
               Delete
             </button>
