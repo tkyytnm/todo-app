@@ -33,29 +33,31 @@ const Login = () => {
       <h2>Login</h2>
       <form onSubmit={handleSubmit}>
         <table>
-          <tr>
-            <td>
-              <label htmlFor="email">Email:</label>
-            </td>
-            <td>
-              <input type="email" id="email" name="email" required />
-            </td>
-          </tr>
-          <tr>
-            <td>
-              <label htmlFor="password">Password:</label>
-            </td>
-            <td>
-              <input type="password" id="password" name="password" required />
-            </td>
-          </tr>
-          <tr>
-            <td colSpan="2">
-              <button disabled={isLoading} className="positive">
-                Login
-              </button>
-            </td>
-          </tr>
+          <tbody>
+            <tr>
+              <td>
+                <label htmlFor="email">Email:</label>
+              </td>
+              <td>
+                <input type="email" id="email" name="email" required />
+              </td>
+            </tr>
+            <tr>
+              <td>
+                <label htmlFor="password">Password:</label>
+              </td>
+              <td>
+                <input type="password" id="password" name="password" required />
+              </td>
+            </tr>
+            <tr>
+              <td colSpan="2">
+                <button disabled={isLoading} className="positive">
+                  Login
+                </button>
+              </td>
+            </tr>
+          </tbody>
         </table>
       </form>
     </>

@@ -21,7 +21,7 @@ const Visibility = () => {
         defaultChecked={user.visibility}
         onChange={handleOnChange}
       />
-      <label htmlFor="visibility">Show completed tasks.</label>
+      <label htmlFor="visibility">Show completed tasks</label>
     </p>
   );
 };
