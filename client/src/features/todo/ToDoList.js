@@ -6,14 +6,14 @@ import {
   deleteToDo,
   selectIsLoading,
 } from "./toDoSlice";
-import { selectAuthUser } from "../auth/authSlice";
+import { selectUser } from "../auth/authSlice";
 import { useEffect } from "react";
 
 const ToDoList = () => {
   const dispatch = useDispatch();
   const toDos = useSelector(selectToDos);
   const isLoading = useSelector(selectIsLoading);
-  const authUser = useSelector(selectAuthUser);
+  const user = useSelector(selectUser);
 
   useEffect(() => {
     dispatch(fetchToDos());
@@ -44,7 +44,7 @@ const ToDoList = () => {
   };
 
   const filterToDos = (toDos) => {
-    if (authUser.visibility) {
+    if (user.visibility) {
       return toDos;
     } else {
       return toDos.filter((toDo) => !toDo.completed);

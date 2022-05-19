@@ -1,10 +1,9 @@
 import { useDispatch, useSelector } from "react-redux";
-import { updateVisibility } from "../user/userSlice";
-import { selectAuthUser } from "../auth/authSlice";
+import { updateVisibility, selectUser } from "../auth/authSlice";
 
 const Visibility = () => {
   const dispatch = useDispatch();
-  const authUser = useSelector(selectAuthUser);
+  const user = useSelector(selectUser);
 
   const handleOnChange = (e) => {
     const data = {
@@ -19,7 +18,7 @@ const Visibility = () => {
         type="checkbox"
         name="visibility"
         id="visibility"
-        defaultChecked={authUser.visibility}
+        defaultChecked={user.visibility}
         onChange={handleOnChange}
       />
       <label htmlFor="visibility">Show completed tasks.</label>

@@ -1,7 +1,7 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 
-export const fetchAuthUserData = createAsyncThunk(
-  "user/fetchAuthUserData",
+export const fetchUserData = createAsyncThunk(
+  "auth/fetchUserData",
   async () => {
     const response = await fetch("/api/user");
     return await response.json();
@@ -43,6 +43,55 @@ export const logoutUser = createAsyncThunk("auth/logoutUser", async () => {
   return await response.json();
 });
 
+export const updateVisibility = createAsyncThunk(
+  "auth/updateVisibility",
+  async (data) => {
+    const response = await fetch("/api/user/visibility", {
+      method: "PUT",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(data),
+    });
+    return await response.json();
+  }
+);
+
+export const updateProfile = createAsyncThunk(
+  "auth/updateProfile",
+  async (data) => {
+    const response = await fetch("/api/user/profile", {
+      method: "PUT",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(data),
+    });
+    return await response.json();
+  }
+);
+
+export const updatePassword = createAsyncThunk(
+  "auth/updatePassword",
+  async (data) => {
+    const response = await fetch("/api/user/password", {
+      method: "PUT",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(data),
+    });
+    return await response.json();
+  }
+);
+
+export const deleteUser = createAsyncThunk("auth/deleteUser", async () => {
+  const response = await fetch("/api/user", {
+    method: "DELETE",
+  });
+  return await response.json();
+});
+
 const authSlice = createSlice({
   name: "auth",
   initialState: {
@@ -52,14 +101,14 @@ const authSlice = createSlice({
   },
   extraReducers: (builder) => {
     builder
-      .addCase(fetchAuthUserData.pending, (state, action) => {
+      .addCase(fetchUserData.pending, (state, action) => {
         state.isLoading = true;
       })
-      .addCase(fetchAuthUserData.fulfilled, (state, action) => {
+      .addCase(fetchUserData.fulfilled, (state, action) => {
         state.isLoading = false;
         state.user = action.payload;
       })
-      .addCase(fetchAuthUserData.rejected, (state, action) => {
+      .addCase(fetchUserData.rejected, (state, action) => {
         state.isLoading = false;
         state.isRejected = true;
       });
@@ -99,9 +148,57 @@ const authSlice = createSlice({
         state.isLoading = false;
         state.isRejected = true;
       });
+    builder
+      .addCase(updateVisibility.pending, (state, action) => {
+        state.isLoading = true;
+      })
+      .addCase(updateVisibility.fulfilled, (state, action) => {
+        state.isLoading = false;
+        state.user = action.payload;
+      })
+      .addCase(updateVisibility.rejected, (state, action) => {
+        state.isLoading = false;
+        state.isRejected = true;
+      });
+    builder
+      .addCase(updateProfile.pending, (state, action) => {
+        state.isLoading = true;
+      })
+      .addCase(updateProfile.fulfilled, (state, action) => {
+        state.isLoading = false;
+        state.user = action.payload;
+      })
+      .addCase(updateProfile.rejected, (state, action) => {
+        state.isLoading = false;
+        state.isRejected = true;
+      });
+    builder
+      .addCase(updatePassword.pending, (state, action) => {
+        state.isLoading = true;
+      })
+      .addCase(updatePassword.fulfilled, (state, action) => {
+        state.isLoading = false;
+        state.user = action.payload;
+      })
+      .addCase(updatePassword.rejected, (state, action) => {
+        state.isLoading = false;
+        state.isRejected = true;
+      });
+    builder
+      .addCase(deleteUser.pending, (state, action) => {
+        state.isLoading = true;
+      })
+      .addCase(deleteUser.fulfilled, (state, action) => {
+        state.isLoading = false;
+        state.user = {};
+      })
+      .addCase(deleteUser.rejected, (state, action) => {
+        state.isLoading = false;
+        state.isRejected = true;
+      });
   },
 });
 
 export default authSlice.reducer;
-export const selectAuthUser = (state) => state.auth.user;
+export const selectUser = (state) => state.auth.user;
 export const selectIsLoading = (state) => state.auth.isLoading;

@@ -1,22 +1,20 @@
 import { Link } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import {
+  selectUser,
   logoutUser,
-  fetchAuthUserData,
-  selectAuthUser,
+  fetchUserData,
 } from "../../features/auth/authSlice";
-import { selectUser } from "../../features/user/userSlice";
 import { useEffect } from "react";
 import { FiSettings } from "react-icons/fi";
 
 const Nav = () => {
-  const authUser = useSelector(selectAuthUser);
   const user = useSelector(selectUser);
   const dispatch = useDispatch();
 
   useEffect(() => {
-    dispatch(fetchAuthUserData());
-  }, [dispatch, user]);
+    dispatch(fetchUserData());
+  }, [dispatch]);
 
   const handleClick = () => {
     dispatch(logoutUser());
@@ -24,12 +22,12 @@ const Nav = () => {
 
   return (
     <nav>
-      {authUser.id ? (
+      {user.id ? (
         <>
           <Link to="todo">ToDo</Link>
           <Link to="user">
             <FiSettings />
-            {authUser.email}
+            {user.email}
           </Link>
           <button onClick={handleClick} className="logout">
             Logout
