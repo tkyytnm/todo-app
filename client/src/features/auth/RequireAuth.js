@@ -1,20 +1,14 @@
 import { useLocation, Navigate } from "react-router-dom";
-import { selectAuthUser, fetchAuthUserData } from "../auth/authSlice";
-import { useSelector, useDispatch } from "react-redux";
-import { useEffect } from "react";
+import { selectAuthUser } from "../auth/authSlice";
+import { useSelector } from "react-redux";
 
 const RequireAuth = ({ children }) => {
   const location = useLocation();
   const authUser = useSelector(selectAuthUser);
-  const dispatch = useDispatch();
 
-  useEffect(() => {
-    dispatch(fetchAuthUserData()).then(() => {
-      if (!authUser.id) {
-        return <Navigate to="/login" state={{ from: location }} replace />;
-      }
-    });
-  }, [dispatch, authUser.id, location]);
+  if (!authUser.id) {
+    return <Navigate to="/login" state={{ from: location }} replace />;
+  }
 
   return children;
 };

@@ -11,6 +11,34 @@ section {
   margin: 100px auto;
 }
 
+#todo {
+  padding: 0;
+}
+
+#todo li {
+  list-style-type: none;
+  padding: 5px;
+  border-top: 1px solid #ccc;
+}
+
+#todo input[type="checkbox"] {
+  cursor: pointer;
+  width: 18px;
+  height: 18px;
+  vertical-align: bottom;
+}
+
+#todo input[type="text"] {
+  border: none;
+  margin-right: 5px;
+  width: 390px;
+}
+
+#todo svg {
+  margin: 0 4px;
+  vertical-align: text-bottom;
+}
+
 footer {
   text-align: center;
   color: #999999;
