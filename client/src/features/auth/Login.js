@@ -1,7 +1,7 @@
 import { useDispatch, useSelector } from "react-redux";
 import { loginUser, selectIsLoading, selectUser } from "./authSlice";
 import { useNavigate } from "react-router-dom";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 
 const Login = () => {
   const dispatch = useDispatch();
@@ -28,9 +28,11 @@ const Login = () => {
       });
   };
 
-  if (user.id) {
-    navigate(-1);
-  }
+  useEffect(() => {
+    if (user.id) {
+      navigate("/todo", { replace: true });
+    }
+  }, [navigate, user.id]);
 
   return (
     <>

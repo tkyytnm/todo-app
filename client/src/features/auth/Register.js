@@ -1,6 +1,6 @@
 import { useDispatch, useSelector } from "react-redux";
 import { registerUser, selectIsLoading, selectUser } from "./authSlice";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 
 const Register = () => {
@@ -28,9 +28,11 @@ const Register = () => {
       });
   };
 
-  if (user.id) {
-    navigate(-1);
-  }
+  useEffect(() => {
+    if (user.id) {
+      navigate("/todo", { replace: true });
+    }
+  }, [navigate, user.id]);
 
   return (
     <>

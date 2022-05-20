@@ -35,6 +35,7 @@ function App() {
               }
             />
           </Route>
+          <Route path="*" element={<h2>404 Not Found</h2>} />
         </Routes>
       </section>
       <Footer />
