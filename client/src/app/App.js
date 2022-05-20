@@ -21,21 +21,23 @@ function App() {
             <Route
               path="todo"
               element={
-                <RequireAuth>
+                <>
+                  <RequireAuth />
                   <ToDo />
-                </RequireAuth>
+                </>
               }
             />
             <Route
               path="user"
               element={
-                <RequireAuth>
+                <>
+                  <RequireAuth />
                   <User />
-                </RequireAuth>
+                </>
               }
             />
           </Route>
-          <Route path="*" element={<h2>404 Not Found</h2>} />
+          <Route path="*" element={<h2>Not Found.</h2>} />
         </Routes>
       </section>
       <Footer />

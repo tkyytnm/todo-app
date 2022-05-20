@@ -3,11 +3,10 @@ import {
   updateProfile,
   updatePassword,
   deleteUser,
-  fetchUserData,
   selectIsLoading,
 } from "../auth/authSlice";
 import { useDispatch, useSelector } from "react-redux";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 
 const User = () => {
   const dispatch = useDispatch();
@@ -15,10 +14,6 @@ const User = () => {
   const isLoading = useSelector(selectIsLoading);
   const [messageEmail, setMessageEmail] = useState("");
   const [messagePassword, setMessagePassword] = useState("");
-
-  useEffect(() => {
-    dispatch(fetchUserData());
-  }, [dispatch]);
 
   const handleSubmit = (e) => {
     e.preventDefault();
