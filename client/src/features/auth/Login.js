@@ -2,13 +2,14 @@ import { useDispatch, useSelector } from "react-redux";
 import { loginUser, selectIsLoading, selectUser } from "./authSlice";
 
 import { useNavigate } from "react-router-dom";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 
 const Login = () => {
   const dispatch = useDispatch();
   const isLoading = useSelector(selectIsLoading);
   const user = useSelector(selectUser);
   const navigate = useNavigate();
+  const [message, setMessage] = useState("");
 
   useEffect(() => {
     if (user.id) {
@@ -24,8 +25,14 @@ const Login = () => {
         password: e.target.password.value,
       })
     )
-      .then(() => navigate("/todo", { replace: true }))
-      .catch((err) => console.log(err));
+      .unwrap()
+      .then((res) => {
+        if (res.id) {
+          navigate("/todo", { replace: true });
+        } else {
+          setMessage(res.message);
+        }
+      });
   };
 
   return (
@@ -52,6 +59,7 @@ const Login = () => {
             </tr>
             <tr>
               <td colSpan="2">
+                {message && <p className="message-red">{message}</p>}
                 <button disabled={isLoading} className="positive">
                   Login
                 </button>

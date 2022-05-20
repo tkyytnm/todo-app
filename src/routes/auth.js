@@ -6,7 +6,7 @@ const passport = require("passport");
 const createError = require("http-errors");
 
 router.get("/login", (req, res, next) => {
-  res.send(req.session.messages);
+  next(createError(401, req.session.messages[req.session.messages.length - 1]));
 });
 
 /**
@@ -68,7 +68,7 @@ router.post("/logout", (req, res, next) => {
     req.logout();
     res.status(201).send({ message: "Logged out." });
   } catch (err) {
-    throw err;
+    next(err);
   }
 });
 

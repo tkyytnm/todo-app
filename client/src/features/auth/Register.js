@@ -1,6 +1,6 @@
 import { useDispatch, useSelector } from "react-redux";
 import { registerUser, selectIsLoading, selectUser } from "./authSlice";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 
 const Register = () => {
@@ -8,6 +8,7 @@ const Register = () => {
   const user = useSelector(selectUser);
   const isLoading = useSelector(selectIsLoading);
   const navigate = useNavigate();
+  const [message, setMessage] = useState("");
 
   useEffect(() => {
     if (user.id) {
@@ -22,7 +23,15 @@ const Register = () => {
         email: e.target.email.value,
         password: e.target.password.value,
       })
-    );
+    )
+      .unwrap()
+      .then((res) => {
+        if (res.id) {
+          navigate("/todo", { replace: true });
+        } else {
+          setMessage(res.message);
+        }
+      });
   };
 
   return (
@@ -49,6 +58,7 @@ const Register = () => {
             </tr>
             <tr>
               <td colSpan="2">
+                {message && <p className="message-red">{message}</p>}
                 <button disabled={isLoading} className="positive">
                   Register
                 </button>

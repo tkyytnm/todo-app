@@ -10,7 +10,7 @@ module.exports = class AuthService {
     try {
       const user = await UserModelInstance.findUserByEmail(email);
       if (user) {
-        throw createError(409, "Email already exists.");
+        throw createError(409, "そのEmailアドレスはすでに登録されています。");
       }
       const hash = await bcrypt.hash(password, saltRounds);
       const response = await UserModelInstance.createUser({
@@ -22,6 +22,4 @@ module.exports = class AuthService {
       throw err;
     }
   }
-
-  
 };
