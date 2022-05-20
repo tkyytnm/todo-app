@@ -68,6 +68,7 @@ const ToDoList = () => {
               defaultValue={toDo.body}
               id="body"
               name="body"
+              maxLength="100"
               className={toDo.completed ? "completed" : ""}
               onBlur={(e) => handleUpdateBlur(e, toDo)}
             />

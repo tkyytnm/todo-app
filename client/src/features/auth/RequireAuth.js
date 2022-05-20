@@ -9,7 +9,6 @@ const RequireAuth = ({ children }) => {
   if (!user.id) {
     return <Navigate to="/login" state={{ from: location }} replace />;
   }
-
   return children;
 };
 

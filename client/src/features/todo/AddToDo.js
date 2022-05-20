@@ -21,7 +21,7 @@ const AddToDo = () => {
         <label htmlFor="add-body">
           <GrAdd />
         </label>
-        <input type="text" id="add-body" name="body" />
+        <input type="text" id="add-body" name="body" maxLength="100" />
         <button disabled={isLoading} className="add">
           Add
         </button>

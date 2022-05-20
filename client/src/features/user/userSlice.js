@@ -1,50 +1,15 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 
 export const fetchUserData = createAsyncThunk(
-  "auth/fetchUserData",
+  "user/fetchUserData",
   async () => {
     const response = await fetch("/api/user");
     return await response.json();
   }
 );
 
-export const registerUser = createAsyncThunk(
-  "auth/registerUser",
-  async (data) => {
-    const response = await fetch("/api/auth/register", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify(data),
-    });
-    return await response.json();
-  }
-);
-
-export const loginUser = createAsyncThunk("auth/loginUser", async (data) => {
-  const response = await fetch("/api/auth/login", {
-    method: "POST",
-    headers: {
-      "Content-Type": "application/json",
-    },
-    body: JSON.stringify(data),
-  });
-  return await response.json();
-});
-
-export const logoutUser = createAsyncThunk("auth/logoutUser", async () => {
-  const response = await fetch("/api/auth/logout", {
-    method: "POST",
-    headers: {
-      "Content-Type": "application/json",
-    },
-  });
-  return await response.json();
-});
-
 export const updateVisibility = createAsyncThunk(
-  "auth/updateVisibility",
+  "user/updateVisibility",
   async (data) => {
     const response = await fetch("/api/user/visibility", {
       method: "PUT",
@@ -58,7 +23,7 @@ export const updateVisibility = createAsyncThunk(
 );
 
 export const updateProfile = createAsyncThunk(
-  "auth/updateProfile",
+  "user/updateProfile",
   async (data) => {
     const response = await fetch("/api/user/profile", {
       method: "PUT",
@@ -72,7 +37,7 @@ export const updateProfile = createAsyncThunk(
 );
 
 export const updatePassword = createAsyncThunk(
-  "auth/updatePassword",
+  "user/updatePassword",
   async (data) => {
     const response = await fetch("/api/user/password", {
       method: "PUT",
@@ -85,15 +50,15 @@ export const updatePassword = createAsyncThunk(
   }
 );
 
-export const deleteUser = createAsyncThunk("auth/deleteUser", async () => {
+export const deleteUser = createAsyncThunk("user/deleteUser", async () => {
   const response = await fetch("/api/user", {
     method: "DELETE",
   });
   return await response.json();
 });
 
-const authSlice = createSlice({
-  name: "auth",
+const userSlice = createSlice({
+  name: "user",
   initialState: {
     user: {},
     isLoading: false,
@@ -109,42 +74,6 @@ const authSlice = createSlice({
         state.user = action.payload;
       })
       .addCase(fetchUserData.rejected, (state, action) => {
-        state.isLoading = false;
-        state.isRejected = true;
-      });
-    builder
-      .addCase(registerUser.pending, (state, action) => {
-        state.isLoading = true;
-      })
-      .addCase(registerUser.fulfilled, (state, action) => {
-        state.isLoading = false;
-        state.user = action.payload;
-      })
-      .addCase(registerUser.rejected, (state, action) => {
-        state.isLoading = false;
-        state.isRejected = true;
-      });
-    builder
-      .addCase(loginUser.pending, (state, action) => {
-        state.isLoading = true;
-      })
-      .addCase(loginUser.fulfilled, (state, action) => {
-        state.isLoading = false;
-        state.user = action.payload;
-      })
-      .addCase(loginUser.rejected, (state, action) => {
-        state.isLoading = false;
-        state.isRejected = true;
-      });
-    builder
-      .addCase(logoutUser.pending, (state, action) => {
-        state.isLoading = true;
-      })
-      .addCase(logoutUser.fulfilled, (state, action) => {
-        state.isLoading = false;
-        state.user = action.payload;
-      })
-      .addCase(logoutUser.rejected, (state, action) => {
         state.isLoading = false;
         state.isRejected = true;
       });
@@ -166,8 +95,7 @@ const authSlice = createSlice({
       })
       .addCase(updateProfile.fulfilled, (state, action) => {
         state.isLoading = false;
-        // To prevent overwriting the user object when an error message returns.
-        state.user = { ...state.user, ...action.payload };
+        state.user = action.payload;
       })
       .addCase(updateProfile.rejected, (state, action) => {
         state.isLoading = false;
@@ -179,8 +107,7 @@ const authSlice = createSlice({
       })
       .addCase(updatePassword.fulfilled, (state, action) => {
         state.isLoading = false;
-        // To prevent overwriting the user object when an error message returns.
-        state.user = { ...state.user, ...action.payload };
+        state.user = action.payload;
       })
       .addCase(updatePassword.rejected, (state, action) => {
         state.isLoading = false;
@@ -201,6 +128,6 @@ const authSlice = createSlice({
   },
 });
 
-export default authSlice.reducer;
-export const selectUser = (state) => state.auth.user;
-export const selectIsLoading = (state) => state.auth.isLoading;
+export default userSlice.reducer;
+export const selectUser = (state) => state.user.user;
+export const selectIsLoading = (state) => state.user.isLoading;

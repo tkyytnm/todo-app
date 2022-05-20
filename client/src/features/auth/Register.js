@@ -1,20 +1,14 @@
 import { useDispatch, useSelector } from "react-redux";
 import { registerUser, selectIsLoading, selectUser } from "./authSlice";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 
 const Register = () => {
   const dispatch = useDispatch();
-  const user = useSelector(selectUser);
   const isLoading = useSelector(selectIsLoading);
   const navigate = useNavigate();
+  const user = useSelector(selectUser);
   const [message, setMessage] = useState("");
-
-  useEffect(() => {
-    if (user.id) {
-      navigate("/todo", { replace: true });
-    }
-  }, [user.id, navigate]);
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -34,6 +28,10 @@ const Register = () => {
       });
   };
 
+  if (user.id) {
+    navigate(-1);
+  }
+
   return (
     <>
       <h2>Register</h2>
@@ -45,7 +43,13 @@ const Register = () => {
                 <label htmlFor="email">Email:</label>
               </td>
               <td>
-                <input type="email" id="email" name="email" required />
+                <input
+                  type="email"
+                  id="email"
+                  name="email"
+                  required
+                  maxLength="100"
+                />
               </td>
             </tr>
             <tr>
@@ -53,7 +57,13 @@ const Register = () => {
                 <label htmlFor="password">Password:</label>
               </td>
               <td>
-                <input type="password" id="password" name="password" required />
+                <input
+                  type="password"
+                  id="password"
+                  name="password"
+                  required
+                  maxLength="100"
+                />
               </td>
             </tr>
             <tr>

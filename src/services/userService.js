@@ -4,6 +4,7 @@ const bcrypt = require("bcrypt");
 const saltRounds = 10;
 const ToDoModel = require("../models/todo");
 const ToDoModelInstance = new ToDoModel();
+const createError = require("http-errors");
 
 module.exports = class userService {
   async getUserById(id) {
@@ -26,6 +27,11 @@ module.exports = class userService {
 
   async updateProfile(data) {
     try {
+      const { email } = data;
+      const user = await UserModelInstance.findUserByEmail(email);
+      if (user) {
+        throw createError(409, "そのEmailアドレスはすでに登録されています。");
+      }
       const response = await UserModelInstance.updateProfile(data);
       return response;
     } catch (err) {
