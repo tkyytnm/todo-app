@@ -1,10 +1,7 @@
 import { Link } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
-import {
-  selectUser,
-  logoutUser,
-  fetchUserData,
-} from "../../features/auth/authSlice";
+import { selectUser } from "../../features/auth/authSlice";
+import { fetchUserData, logoutUser } from "../../features/auth/authThunk";
 import { useEffect } from "react";
 import { FiSettings } from "react-icons/fi";
 

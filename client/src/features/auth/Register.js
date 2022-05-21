@@ -1,13 +1,13 @@
 import { useDispatch, useSelector } from "react-redux";
-import { registerUser, selectIsLoading, selectUser } from "./authSlice";
-import { useState, useEffect } from "react";
+import { selectIsLoading } from "./authSlice";
+import { registerUser } from "./authThunk";
+import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 
 const Register = () => {
   const dispatch = useDispatch();
   const isLoading = useSelector(selectIsLoading);
   const navigate = useNavigate();
-  const user = useSelector(selectUser);
   const [message, setMessage] = useState("");
 
   const handleSubmit = (e) => {
@@ -27,12 +27,6 @@ const Register = () => {
         }
       });
   };
-
-  useEffect(() => {
-    if (user.id) {
-      navigate("/todo", { replace: true });
-    }
-  }, [navigate, user.id]);
 
   return (
     <>

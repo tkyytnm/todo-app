@@ -1,5 +1,6 @@
 import { useDispatch, useSelector } from "react-redux";
-import { updateVisibility, selectUser } from "../auth/authSlice";
+import { selectUser } from "../auth/authSlice";
+import { updateVisibility } from "../auth/authThunk";
 
 const Visibility = () => {
   const dispatch = useDispatch();

@@ -1,10 +1,5 @@
-import {
-  selectUser,
-  updateProfile,
-  updatePassword,
-  deleteUser,
-  selectIsLoading,
-} from "../auth/authSlice";
+import { selectUser, selectIsLoading } from "../auth/authSlice";
+import { updateProfile, updatePassword, deleteUser } from "../auth/authThunk";
 import { useDispatch, useSelector } from "react-redux";
 import { useState } from "react";
 
@@ -48,7 +43,6 @@ const User = () => {
       <div className="profile">
         <h3>Update email</h3>
         <form onSubmit={handleSubmit}>
-          {messageEmail && <p className="message-red">{messageEmail}</p>}
           <input
             type="email"
             id="email"
@@ -60,10 +54,10 @@ const User = () => {
           <button disabled={isLoading} className="update">
             Update
           </button>
+          {messageEmail && <p className="message-red">{messageEmail}</p>}
         </form>
         <h3>Update password</h3>
         <form onSubmit={handleSubmit}>
-          {messagePassword && <p className="message-red">{messagePassword}</p>}
           <input
             type="password"
             id="password"
@@ -75,6 +69,7 @@ const User = () => {
           <button disabled={isLoading} className="update">
             Update
           </button>
+          {messagePassword && <p className="message-red">{messagePassword}</p>}
         </form>
         <h3>Delete user account</h3>
         <button onClick={handleClick} disabled={isLoading} className="delete">

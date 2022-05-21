@@ -21,19 +21,17 @@ function App() {
             <Route
               path="todo"
               element={
-                <>
-                  <RequireAuth />
+                <RequireAuth>
                   <ToDo />
-                </>
+                </RequireAuth>
               }
             />
             <Route
               path="user"
               element={
-                <>
-                  <RequireAuth />
+                <RequireAuth>
                   <User />
-                </>
+                </RequireAuth>
               }
             />
           </Route>
