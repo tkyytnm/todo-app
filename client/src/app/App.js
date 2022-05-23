@@ -1,5 +1,5 @@
 import "./App.css";
-import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
+import { Routes, Route, Navigate } from "react-router-dom";
 import Header from "../common/header/Header";
 import Footer from "../common/footer/Footer";
 import Register from "../features/auth/Register";
@@ -10,7 +10,7 @@ import RequireAuth from "../features/auth/RequireAuth";
 
 function App() {
   return (
-    <BrowserRouter>
+    <>
       <Header />
       <section>
         <Routes>
@@ -39,7 +39,7 @@ function App() {
         </Routes>
       </section>
       <Footer />
-    </BrowserRouter>
+    </>
   );
 }
 
