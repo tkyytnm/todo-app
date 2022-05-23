@@ -18,7 +18,8 @@ const user = {
 describe("Test auth routes", () => {
   test("GET /api/auth/login", async () => {
     const res = await request(app).get("/api/auth/login");
-    expect(res.statusCode).toEqual(200);
+    expect(res.statusCode).toEqual(500);
+    expect(res.body.message).toBe('Something wrong.');
   });
 
   test("POST /api/auth/register", async () => {

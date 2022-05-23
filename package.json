@@ -6,15 +6,19 @@
   "scripts": {
     "start": "node server.js",
     "dev": "nodemon -r dotenv/config server.js",
-    "test": "jest --setupFiles dotenv/config --testPathPattern=__tests__ --coverage --detectOpenHandles"
+    "serve": "node -r dotenv/config server.js && cd client && npm build",
+    "test": "jest --setupFiles dotenv/config --testPathPattern=__tests__ --coverage --detectOpenHandles",
+    "e2e": "jest --testPathPattern=.*e2e.test.js$"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "devDependencies": {
     "@faker-js/faker": "^6.3.1",
+    "install": "^0.13.0",
     "jest": "^28.1.0",
     "nodemon": "^2.0.16",
+    "puppeteer": "^14.1.1",
     "supertest": "^6.2.3"
   },
   "dependencies": {
