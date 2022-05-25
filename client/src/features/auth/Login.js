@@ -31,7 +31,7 @@ const Login = () => {
   return (
     <>
       <h2>ログイン</h2>
-      <form onSubmit={handleSubmit}>
+      <form onSubmit={handleSubmit} id="login">
         <table>
           <tbody>
             <tr>

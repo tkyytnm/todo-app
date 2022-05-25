@@ -55,23 +55,25 @@ const ToDoList = () => {
     <>
       {filterToDos(toDos).map((toDo) => {
         return (
-          <li key={toDo.id}>
-            <input
-              type="checkbox"
-              id="completed"
-              name="completed"
-              defaultChecked={toDo.completed}
-              onChange={(e) => handleUpdateChange(e, toDo)}
-            />
-            <input
-              type="text"
-              defaultValue={toDo.body}
-              id="body"
-              name="body"
-              maxLength="100"
-              className={toDo.completed ? "completed" : ""}
-              onBlur={(e) => handleUpdateBlur(e, toDo)}
-            />
+          <li key={toDo.id} className="todo-list">
+            <div className="todo-body">
+              <input
+                type="checkbox"
+                id="completed"
+                name="completed"
+                defaultChecked={toDo.completed}
+                onChange={(e) => handleUpdateChange(e, toDo)}
+              />
+              <input
+                type="text"
+                defaultValue={toDo.body}
+                id="body"
+                name="body"
+                maxLength="100"
+                className={toDo.completed ? "completed" : ""}
+                onBlur={(e) => handleUpdateBlur(e, toDo)}
+              />
+            </div>
             <button
               onClick={() => handleDeleteClick(toDo.id)}
               disabled={isLoading}

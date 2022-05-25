@@ -27,6 +27,160 @@ nav svg {
   display: none;
 }
 
+section {
+  margin: 40px auto;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+#todo {
+  padding: 0;
+  box-shadow: 0px 0px 15px rgba(0, 0, 0, 0.2);
+  padding: 30px;
+  margin: 10px auto;
+  width: 400px;
+}
+
+#todo li {
+  list-style-type: none;
+  padding: 5px;
+  border-top: 1px solid #eee;
+}
+
+#todo li.todo-list,
+#todo li.add-todo form {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+#todo li:last-of-type {
+  border-bottom: 1px solid #eee;
+}
+
+#todo .todo-body {
+  width: 86%;
+  display: flex;
+  justify-content: left;
+  align-items: center;
+}
+
+#todo input[type="checkbox"] {
+  cursor: pointer;
+  width: 18px;
+  height: 18px;
+}
+
+#todo input[type="text"] {
+  border: none;
+  margin-right: 5px;
+  width: 100%;
+}
+
+#todo input[type="text"].completed {
+  color: #999;
+  text-decoration: line-through;
+}
+
+#todo input[type="text"]:focus {
+  outline: none;
+}
+
+#todo svg {
+  margin: 0 4px;
+}
+
+input[type="text"],
+input[type="email"],
+input[type="password"] {
+  margin-right: 2px;
+  padding: 2px;
+}
+
+button {
+  display: inline-block;
+  padding: 2px 5px;
+  font-size: 12px;
+  cursor: pointer;
+  text-align: center;
+  text-decoration: none;
+  outline: none;
+  color: #fff;
+  border: none;
+  border-radius: 5px;
+  vertical-align: text-bottom;
+}
+
+button.add,
+button.update,
+button.positive {
+  background-color: #14c38e;
+  box-shadow: 0 3px #36ae7c;
+}
+
+button.delete {
+  background-color: #ff4949;
+  box-shadow: 0 3px #eb5353;
+}
+
+button.logout {
+  display: inline-block;
+  padding: 3px 5px;
+  font-size: 14px;
+  cursor: pointer;
+  text-align: center;
+  text-decoration: underline;
+  outline: none;
+  color: #999;
+  border: none;
+  border-radius: 5px;
+  background: none;
+}
+
+form#login,
+form#register {
+  width: 400px;
+  text-align: center;
+  padding: 30px;
+  margin: 30px auto;
+  box-shadow: 0px 0px 15px rgba(0, 0, 0, 0.2);
+  display: flex;
+  flex-direction: column;
+  text-align: center;
+  align-items: center;
+}
+
+form td {
+  padding: 5px 2px;
+}
+
+.profile {
+  width: 400px;
+  text-align: center;
+  box-shadow: 0px 0px 15px rgba(0, 0, 0, 0.2);
+  padding: 20px 30px 50px;
+  margin: 30px auto;
+}
+
+.profile form {
+  margin-bottom: 50px;
+}
+
+.message-red {
+  font-size: 12px;
+  color: #f32424;
+  background-color: #ffeeee;
+  padding: 5px 10px;
+  border-radius: 5px;
+}
+
+footer {
+  text-align: center;
+  color: #999;
+}
+
 @media screen and (max-width: 600px) {
   nav {
     background-color: #000;
@@ -87,138 +241,29 @@ nav svg {
   #ham.open span:nth-of-type(3) {
     transform: rotate(-45deg) translate(9px, -9px);
   }
-}
 
-section {
-  margin: 40px auto;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-}
+  #todo {
+    width: 70%;
+  }
 
-#todo {
-  padding: 0;
-  box-shadow: 0px 0px 15px rgba(0, 0, 0, 0.2);
-  padding: 30px;
-  margin: 10px auto;
-}
+  form td {
+    display: block;
+    width: 100%;
+  }
 
-#todo li {
-  list-style-type: none;
-  padding: 5px;
-  border-top: 1px solid #eee;
-}
+  form#login,
+  form#register {
+    width: 70%;
+  }
 
-#todo li:last-of-type {
-  border-bottom: 1px solid #eee;
-}
+  .profile {
+    width: 70%;
+  }
 
-#todo input[type="checkbox"] {
-  cursor: pointer;
-  width: 18px;
-  height: 18px;
-  vertical-align: bottom;
-}
-
-#todo input[type="text"] {
-  border: none;
-  margin-right: 5px;
-  width: 300px;
-  vertical-align: text-bottom;
-}
-
-#todo input[type="text"].completed {
-  color: #999;
-  text-decoration: line-through;
-}
-
-#todo input[type="text"]:focus {
-  outline: none;
-}
-
-#todo svg {
-  margin: 0 4px;
-  vertical-align: text-bottom;
-}
-
-input[type="text"],
-input[type="email"],
-input[type="password"] {
-  margin-right: 2px;
-  padding: 2px;
-}
-
-button {
-  display: inline-block;
-  padding: 2px 5px;
-  font-size: 12px;
-  cursor: pointer;
-  text-align: center;
-  text-decoration: none;
-  outline: none;
-  color: #fff;
-  border: none;
-  border-radius: 5px;
-  vertical-align: text-bottom;
-}
-
-button.add,
-button.update,
-button.positive {
-  background-color: #14c38e;
-  box-shadow: 0 3px #36ae7c;
-}
-
-button.delete {
-  background-color: #ff4949;
-  box-shadow: 0 3px #eb5353;
-}
-
-button.logout {
-  display: inline-block;
-  padding: 3px 5px;
-  font-size: 14px;
-  cursor: pointer;
-  text-align: center;
-  text-decoration: underline;
-  outline: none;
-  color: #999;
-  border: none;
-  border-radius: 5px;
-  background: none;
-}
-
-form table {
-  text-align: center;
-  box-shadow: 0px 0px 15px rgba(0, 0, 0, 0.2);
-  padding: 20px 30px;
-  margin: 30px auto;
-}
-form td {
-  padding: 5px 2px;
-}
-
-.profile {
-  text-align: center;
-  box-shadow: 0px 0px 15px rgba(0, 0, 0, 0.2);
-  padding: 20px 40px 50px;
-  margin: 30px auto;
-}
-
-.profile form {
-  margin-bottom: 50px;
-}
-
-.message-red {
-  font-size: 12px;
-  color: #f32424;
-  background-color: #ffeeee;
-  padding: 5px 10px;
-  border-radius: 5px;
-}
-
-footer {
-  text-align: center;
-  color: #999;
+  form#login button,
+  form#register button,
+  .profile button {
+    margin-top: 5px;
+    padding: 2px 10px;
+  }
 }

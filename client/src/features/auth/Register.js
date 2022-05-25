@@ -31,7 +31,7 @@ const Register = () => {
   return (
     <>
       <h2>ユーザー登録</h2>
-      <form onSubmit={handleSubmit}>
+      <form onSubmit={handleSubmit} id="register">
         <table>
           <tbody>
             <tr>

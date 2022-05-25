@@ -16,12 +16,14 @@ const AddToDo = () => {
   };
 
   return (
-    <li>
+    <li className="add-todo">
       <form onSubmit={handleAddSubmit}>
-        <label htmlFor="add-body">
-          <GrAdd />
-        </label>
-        <input type="text" id="add-body" name="body" maxLength="100" />
+        <div className="todo-body">
+          <label htmlFor="add-body">
+            <GrAdd />
+          </label>
+          <input type="text" id="add-body" name="body" maxLength="100" />
+        </div>
         <button disabled={isLoading} className="add">
           追加
         </button>
