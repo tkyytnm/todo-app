@@ -11,7 +11,7 @@
     "dev": "nodemon -r dotenv/config server.js",
     "test": "jest --setupFiles dotenv/config --testPathPattern=__tests__ --coverage --detectOpenHandles",
     "e2e": "jest --testPathPattern=.*e2e.test.js$",
-    "build": "cd client && npm run build"
+    "build": "cd client && npm install && npm run build"
   },
   "keywords": [],
   "author": "",
