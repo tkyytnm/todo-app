@@ -18,7 +18,7 @@ const Nav = ({ hamburger }) => {
   };
 
   return (
-    <nav className={hamburger && "open"}>
+    <nav className={hamburger ? "open" : ""}>
       {user.id ? (
         <>
           <Link to="todo">タスクリスト</Link>

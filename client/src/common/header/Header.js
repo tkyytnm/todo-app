@@ -11,7 +11,11 @@ const Header = () => {
     <header>
       <h1>ToDo App</h1>
       <Nav hamburger={hamburger} />
-      <div id="ham" className={hamburger && "open"} onClick={switchHamburger}>
+      <div
+        id="ham"
+        className={hamburger ? "open" : ""}
+        onClick={switchHamburger}
+      >
         <span></span>
         <span></span>
         <span></span>

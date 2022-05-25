@@ -141,7 +141,7 @@ button.logout {
 
 form#login,
 form#register {
-  width: 400px;
+  width: 300px;
   text-align: center;
   padding: 30px;
   margin: 30px auto;
