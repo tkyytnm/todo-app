@@ -5,7 +5,7 @@ import { fetchUserData, logoutUser } from "../../features/auth/authThunk";
 import { useEffect } from "react";
 import { FiSettings } from "react-icons/fi";
 
-const Nav = () => {
+const Nav = ({ hamburger }) => {
   const user = useSelector(selectUser);
   const dispatch = useDispatch();
 
@@ -18,7 +18,7 @@ const Nav = () => {
   };
 
   return (
-    <nav>
+    <nav className={hamburger && "open"}>
       {user.id ? (
         <>
           <Link to="todo">タスクリスト</Link>
