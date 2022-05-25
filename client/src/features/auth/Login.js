@@ -30,7 +30,7 @@ const Login = () => {
 
   return (
     <>
-      <h2>Login</h2>
+      <h2>ログイン</h2>
       <form onSubmit={handleSubmit}>
         <table>
           <tbody>
@@ -50,7 +50,7 @@ const Login = () => {
             </tr>
             <tr>
               <td>
-                <label htmlFor="password">Password:</label>
+                <label htmlFor="password">パスワード:</label>
               </td>
               <td>
                 <input
@@ -66,7 +66,7 @@ const Login = () => {
               <td colSpan="2">
                 {message && <p className="message-red">{message}</p>}
                 <button disabled={isLoading} className="positive">
-                  Login
+                  ログイン
                 </button>
               </td>
             </tr>

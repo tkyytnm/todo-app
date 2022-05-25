@@ -22,7 +22,7 @@ const Visibility = () => {
         defaultChecked={user.visibility}
         onChange={handleOnChange}
       />
-      <label htmlFor="visibility">Show completed tasks</label>
+      <label htmlFor="visibility">完了したタスクを表示する</label>
     </p>
   );
 };

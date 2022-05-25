@@ -23,7 +23,7 @@ const AddToDo = () => {
         </label>
         <input type="text" id="add-body" name="body" maxLength="100" />
         <button disabled={isLoading} className="add">
-          Add
+          追加
         </button>
       </form>
     </li>

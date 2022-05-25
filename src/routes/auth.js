@@ -6,12 +6,17 @@ const passport = require("passport");
 const createError = require("http-errors");
 
 router.get("/login", (req, res, next) => {
-  if (req.session.messages?.length > 0) {
-    next(
-      createError(401, req.session.messages[req.session.messages.length - 1])
-    );
+  try {
+    if (req.session.messages?.length > 0) {
+      throw createError(
+        401,
+        req.session.messages[req.session.messages.length - 1]
+      );
+    }
+    throw createError(500, "Something wrong.");
+  } catch (err) {
+    next(err);
   }
-  next(createError(500, "Something wrong."));
 });
 
 /**

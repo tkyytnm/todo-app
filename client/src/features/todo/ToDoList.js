@@ -77,7 +77,7 @@ const ToDoList = () => {
               disabled={isLoading}
               className="delete"
             >
-              Delete
+              削除
             </button>
           </li>
         );

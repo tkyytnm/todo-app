@@ -39,9 +39,9 @@ const User = () => {
 
   return (
     <>
-      <h2>User profile</h2>
+      <h2>ユーザー設定</h2>
       <div className="profile">
-        <h3>Update email</h3>
+        <h3>Emailの変更</h3>
         <form onSubmit={handleSubmit}>
           <input
             type="email"
@@ -52,11 +52,11 @@ const User = () => {
             maxLength="100"
           />
           <button disabled={isLoading} className="update">
-            Update
+            変更
           </button>
           {messageEmail && <p className="message-red">{messageEmail}</p>}
         </form>
-        <h3>Update password</h3>
+        <h3>パスワードの変更</h3>
         <form onSubmit={handleSubmit}>
           <input
             type="password"
@@ -67,13 +67,13 @@ const User = () => {
             maxLength="100"
           />
           <button disabled={isLoading} className="update">
-            Update
+            変更
           </button>
           {messagePassword && <p className="message-red">{messagePassword}</p>}
         </form>
-        <h3>Delete user account</h3>
+        <h3>ユーザーアカウントの削除</h3>
         <button onClick={handleClick} disabled={isLoading} className="delete">
-          Delete
+          削除
         </button>
       </div>
     </>

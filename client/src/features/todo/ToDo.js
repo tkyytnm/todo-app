@@ -5,7 +5,7 @@ import Visibility from "./Visibility";
 const ToDo = () => {
   return (
     <>
-      <h2>ToDo List</h2>
+      <h2>タスクリスト</h2>
       <Visibility />
       <ul id="todo">
         <ToDoList />

@@ -30,7 +30,7 @@ const Register = () => {
 
   return (
     <>
-      <h2>Register</h2>
+      <h2>ユーザー登録</h2>
       <form onSubmit={handleSubmit}>
         <table>
           <tbody>
@@ -50,7 +50,7 @@ const Register = () => {
             </tr>
             <tr>
               <td>
-                <label htmlFor="password">Password:</label>
+                <label htmlFor="password">パスワード:</label>
               </td>
               <td>
                 <input
@@ -66,7 +66,7 @@ const Register = () => {
               <td colSpan="2">
                 {message && <p className="message-red">{message}</p>}
                 <button disabled={isLoading} className="positive">
-                  Register
+                  登録
                 </button>
               </td>
             </tr>

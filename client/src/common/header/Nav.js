@@ -21,19 +21,19 @@ const Nav = () => {
     <nav>
       {user.id ? (
         <>
-          <Link to="todo">ToDo</Link>
+          <Link to="todo">タスクリスト</Link>
           <Link to="user">
             <FiSettings />
             {user.email}
           </Link>
           <button onClick={handleClick} className="logout">
-            Logout
+            ログアウト
           </button>
         </>
       ) : (
         <>
-          <Link to="/login">Login</Link>
-          <Link to="/register">Register</Link>
+          <Link to="/login">ログイン</Link>
+          <Link to="/register">ユーザー登録</Link>
         </>
       )}
     </nav>
