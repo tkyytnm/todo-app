@@ -1,8 +1,16 @@
 const { Pool } = require("pg");
-const { USER, PASS, HOST, PORT, NAME } = require("../../config").DB;
-const connectionString = `postgresql://${USER}:${PASS}@${HOST}:${PORT}/${NAME}`;
+const { DB, HEROKU } = require("../../config");
+const config =
+  HEROKU.NODE_ENV === "production"
+    ? {
+        connectionString: HEROKU.DATABASE_URL,
+        ssl: { rejectUnauthorized: false },
+      }
+    : {
+        connectionString: `postgresql://${DB.USER}:${DB.PASS}@${DB.HOST}:${DB.PORT}/${DB.NAME}`,
+      };
 
-const pool = new Pool({ connectionString });
+const pool = new Pool(config);
 
 module.exports = {
   async query(text, params) {
