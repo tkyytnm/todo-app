@@ -4,9 +4,11 @@ import { selectUser } from "../../features/auth/authSlice";
 import { fetchUserData, logoutUser } from "../../features/auth/authThunk";
 import { useEffect } from "react";
 import { FiSettings } from "react-icons/fi";
+import { selectHamOpen } from "../commonSlice";
 
-const Nav = ({ hamburger }) => {
+const Nav = () => {
   const user = useSelector(selectUser);
+  const hamOpen = useSelector(selectHamOpen);
   const dispatch = useDispatch();
 
   useEffect(() => {
@@ -18,7 +20,7 @@ const Nav = ({ hamburger }) => {
   };
 
   return (
-    <nav className={hamburger ? "open" : ""}>
+    <nav className={hamOpen ? "open" : ""}>
       {user.id ? (
         <>
           <Link to="todo">タスクリスト</Link>

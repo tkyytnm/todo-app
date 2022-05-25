@@ -1,21 +1,27 @@
 import Nav from "./Nav";
-import { useState } from "react";
+import { useEffect } from "react";
+import { useLocation } from "react-router-dom";
+import { switchHam, closeHam, selectHamOpen } from "../commonSlice";
+import { useSelector, useDispatch } from "react-redux";
 
 const Header = () => {
-  const [hamburger, setHamburger] = useState(false);
-  const switchHamburger = () => {
-    setHamburger(!hamburger);
+  const location = useLocation();
+  const dispatch = useDispatch();
+  const hamOpen = useSelector(selectHamOpen);
+
+  const handleClick = () => {
+    dispatch(switchHam());
   };
+
+  useEffect(() => {
+    dispatch(closeHam());
+  }, [dispatch, location]);
 
   return (
     <header>
       <h1>ToDo App</h1>
-      <Nav hamburger={hamburger} />
-      <div
-        id="ham"
-        className={hamburger ? "open" : ""}
-        onClick={switchHamburger}
-      >
+      <Nav />
+      <div id="ham" className={hamOpen ? "open" : ""} onClick={handleClick}>
         <span></span>
         <span></span>
         <span></span>
