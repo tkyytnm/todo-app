@@ -7,10 +7,10 @@ describe("Login page", () => {
   test("render Login page", async () => {
     render(<App />);
     expect(screen.getByRole("heading", { level: 2 })).toHaveTextContent(
-      /Login/i
+      /ログイン/i
     );
     expect(screen.getByText(/email/i)).toBeInTheDocument();
-    expect(screen.getByText(/password/i)).toBeInTheDocument();
+    expect(screen.getByText(/パスワード/i)).toBeInTheDocument();
   });
 
   test("send wrong password", async () => {
@@ -44,7 +44,7 @@ describe("Login page", () => {
         screen.queryByText(/Emailまたはパスワードが間違っています。/i)
       ).not.toBeInTheDocument();
     });
-    expect(await screen.findByText(/ToDo List/i)).toBeInTheDocument();
+    expect(await screen.findByText(/タスクリスト/i)).toBeInTheDocument();
     expect(await screen.findByDisplayValue(/Take lunch./i)).toBeInTheDocument();
   });
 });

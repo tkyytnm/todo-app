@@ -5,7 +5,9 @@ let browser;
 let page;
 const user = {
   email: faker.internet.email(),
+  newEmail: faker.internet.email(),
   password: faker.internet.password(),
+  newPassword: faker.internet.password(),
 };
 
 beforeAll(async () => {
@@ -20,16 +22,8 @@ afterAll(async () => {
 describe("Register new user", () => {
   test("display h2 text", async () => {
     await page.goto("http://localhost:3000/register");
-    expect(await page.$eval("h2", (el) => el.textContent)).toMatch("Register");
-  });
-
-  test("Register using email that is used already.", async () => {
-    await page.type("#email", "hanako@example.com");
-    await page.type("#password", "pass");
-    await page.click("button");
-    await page.waitForSelector("p.message-red");
-    expect(await page.$eval("p.message-red", (el) => el.textContent)).toMatch(
-      "そのEmailアドレスはすでに登録されています。"
+    expect(await page.$eval("h2", (el) => el.textContent)).toMatch(
+      "ユーザー登録"
     );
   });
 
@@ -40,25 +34,38 @@ describe("Register new user", () => {
     await page.type("#password", user.password);
     await page.click("button");
     await page.waitForNavigation();
-    expect(await page.$eval("h2", (el) => el.textContent)).toMatch("ToDo List");
+    expect(await page.$eval("h2", (el) => el.textContent)).toMatch(
+      "タスクリスト"
+    );
   });
 
   test("Logout new user", async () => {
     await page.click("button.logout");
     await page.waitForNavigation();
-    expect(await page.$eval("h2", (el) => el.textContent)).toMatch("Login");
+    expect(await page.$eval("h2", (el) => el.textContent)).toMatch("ログイン");
   });
 });
 
+test("Register user with email that is used already.", async () => {
+  await page.goto("http:localhost:3000/register");
+  await page.type("#email", user.email);
+  await page.type("#password", user.password);
+  await page.click("button");
+  await page.waitForSelector("p.message-red");
+  expect(await page.$eval("p.message-red", (el) => el.textContent)).toMatch(
+    "そのEmailアドレスはすでに登録されています。"
+  );
+});
+
 describe("Login page", () => {
-  test('"Login" in h2 element', async () => {
+  test("display h2 element", async () => {
     await page.goto("http://localhost:3000/login");
-    expect(await page.$eval("h2", (el) => el.textContent)).toMatch("Login");
+    expect(await page.$eval("h2", (el) => el.textContent)).toMatch("ログイン");
   });
 
   test("display error message with wrong password", async () => {
     await page.goto("http://localhost:3000/login");
-    await page.type("#email", "hanako@example.com");
+    await page.type("#email", user.email);
     await page.type("#password", "aaaa");
     await page.click("button");
     await page.waitForSelector("p");
@@ -67,45 +74,45 @@ describe("Login page", () => {
 
   test("navigating after login succeeded", async () => {
     await page.goto("http://localhost:3000/login");
-    await page.type("#email", "hanako@example.com");
-    await page.type("#password", "pass");
+    await page.type("#email", user.email);
+    await page.type("#password", user.password);
     await page.click("button");
     await page.waitForNavigation();
-    expect(await page.$eval("h2", (el) => el.textContent)).toMatch("ToDo List");
+    expect(await page.$eval("h2", (el) => el.textContent)).toMatch(
+      "タスクリスト"
+    );
   });
 
   test("logout button", async () => {
     await page.click("button.logout");
     await page.waitForNavigation();
-    expect(await page.$eval("h2", (el) => el.textContent)).toMatch("Login");
+    expect(await page.$eval("h2", (el) => el.textContent)).toMatch("ログイン");
   });
 });
 
 describe("ToDo list page", () => {
   beforeAll(async () => {
     await page.goto("http://localhost:3000/login");
-    await page.type("#email", "hanako@example.com");
-    await page.type("#password", "pass");
+    await page.type("#email", user.email);
+    await page.type("#password", user.password);
     await page.click("button");
     await page.waitForNavigation();
-  });
-
-  afterAll(async () => {
-    await page.click("button.logout");
   });
 
   test("click navigation links", async () => {
     const handle = await page.$$("nav a");
     await handle[1].click();
     expect(await page.$eval("h2", (el) => el.textContent)).toMatch(
-      "User profile"
+      "ユーザー設定"
     );
     await handle[0].click();
-    expect(await page.$eval("h2", (el) => el.textContent)).toMatch("ToDo List");
+    expect(await page.$eval("h2", (el) => el.textContent)).toMatch(
+      "タスクリスト"
+    );
   });
 
   const newToDo = faker.word.verb();
-  test("add todo", async () => {
+  test("add 2 todo", async () => {
     await page.type("#add-body", newToDo);
     await page.waitForTimeout(1000);
     await page.click("button.add");
@@ -127,8 +134,51 @@ describe("ToDo list page", () => {
     expect(
       await page.$$eval(
         'input[type="text"]#body',
-        (el) => el[el.length - 1].value
+        (el) => el[el.length - 1]?.value
       )
-    ).not.toMatch(newToDo);
+    ).not.toBe(newToDo);
+  });
+});
+
+describe("User page", () => {
+  beforeAll(async () => {
+    await page.goto("http://localhost:3000/user");
+  });
+
+  test("Update email address", async () => {
+    await page.evaluate(() => (document.getElementById("email").value = ""));
+    await page.type("#email", user.newEmail);
+    const buttons = await page.$$("button.update");
+    await buttons[0].click();
+    const navLink = await page.$$("nav a");
+    await page.waitForTimeout(1000);
+    expect(await navLink[1].evaluate((el) => el.textContent)).toBe(
+      user.newEmail
+    );
+  });
+
+  test("Update password and logout and login", async () => {
+    await page.type("#password", user.newPassword);
+    const buttons = await page.$$("button.update");
+    await buttons[1].click();
+    await page.click("button.logout");
+    await page.waitForNavigation();
+
+    await page.type("#email", user.newEmail);
+    await page.type("#password", user.newPassword);
+    await page.click("button");
+    await page.waitForNavigation();
+
+    expect(await page.url()).toBe("http://localhost:3000/todo");
+  });
+
+  test("Delete user account", async () => {
+    await page.goto("http://localhost:3000/user");
+    await page.on("dialog", async (dialog) => {
+      await dialog.accept();
+    });
+    await page.click("button.delete");
+    await page.waitForNavigation();
+    expect(await page.url()).toBe("http://localhost:3000/login");
   });
 });
